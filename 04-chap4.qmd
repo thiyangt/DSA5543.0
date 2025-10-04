@@ -156,9 +156,9 @@ Derive
 
 Consider the following $AR(1)$ model. 
 
-\begin{equation}
+$$
 Y_t=\phi_0+\phi_1Y_{t-1}+\epsilon_{t}
-\end{equation}
+$${#eq-ar}
 
 where ${\epsilon_t}$ is assumed to be a white noise process with mean zero and variance $\sigma^2$. 
 

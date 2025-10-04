@@ -307,9 +307,9 @@ window.Quarto = {
 </ul></section><section id="properties-of-ar1-model" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="properties-of-ar1-model">
 <span class="header-section-number">4.8</span> Properties of AR(1) model</h2>
 <p>Consider the following <span class="math inline">AR(1)</span> model.</p>
-<p><span class="math display">\begin{equation}
+<p><span id="eq-ar"><span class="math display">
 Y_t=\phi_0+\phi_1Y_{t-1}+\epsilon_{t}
-\end{equation}</span></p>
+\tag{4.1}</span></span></p>
 <p>where <span class="math inline">{\epsilon_t}</span> is assumed to be a white noise process with mean zero and variance <span class="math inline">\sigma^2</span>.</p>
 <section id="mean" class="level3"><h3 class="anchored" data-anchor-id="mean">Mean</h3>
 <p>Assuming that the series is weak stationary, we have <span class="math inline">E(Y_t)=\mu</span>, <span class="math inline">Var(Y_t)=\gamma_0</span>, and <span class="math inline">Cov(Y_t, Y_{t-k})=\gamma_k</span>, where <span class="math inline">\mu</span> and <span class="math inline">\gamma_0</span> are constants. Given that <span class="math inline">{\epsilon_t}</span> is a white noise, we have <span class="math inline">E(\epsilon_t)=0</span>. The mean of <span class="math inline">AR(1)</span> process can be computed as follows:</p>

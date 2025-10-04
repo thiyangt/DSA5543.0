@@ -2143,9 +2143,9 @@ Derive
 
 Consider the following \(AR(1)\) model.
 
-\begin{equation}
+\begin{equation}\phantomsection\label{eq-ar}{
 Y_t=\phi_0+\phi_1Y_{t-1}+\epsilon_{t}
-\end{equation}
+}\end{equation}
 
 where \({\epsilon_t}\) is assumed to be a white noise process with mean
 zero and variance \(\sigma^2\).
@@ -2183,7 +2183,7 @@ exists if \(\phi_1 \neq 1 .\) The mean of \(Y_t\) is zero if and only if
 \subsection{Variance and the stationary condition of AR (1)
 process}\label{variance-and-the-stationary-condition-of-ar-1-process}
 
-First take variance of both sides of Equation \textbf{?@eq-ar}
+First take variance of both sides of Equation Equation~\ref{eq-ar}
 
 \[Var(Y_t)=Var(\phi_0+\phi_1 Y_{t-1}+\epsilon_t)\]
 
@@ -2200,7 +2200,7 @@ Under the stationarity condition, \(Var(Y_t)=Var(Y_{t-1})\). Hence,
 provided that \(\phi_1^2 < 1\) or \(|\phi_1| < 1\) (The variance of a
 random variable is bounded and non-negative). The necessary and
 sufficient condition for the \(AR(1)\) model in Equation
-\textbf{?@eq-ar} to be weakly stationary is \(|\phi_1| < 1\). This
+Equation~\ref{eq-ar} to be weakly stationary is \(|\phi_1| < 1\). This
 condition is equivalent to saying that the root of \(1-\phi_1B = 0\)
 must lie outside the unit circle. This can be explained as below
 
@@ -2241,8 +2241,8 @@ Now we have
 process}\label{autocorrelation-function-of-an-ar1-process}
 
 To derive autocorrelation function of an AR(1) process we first multiply
-both sides of Equation \textbf{?@eq-ar} by \(Y_{t-k}\) and take expected
-values:
+both sides of Equation Equation~\ref{eq-ar} by \(Y_{t-k}\) and take
+expected values:
 
 \[E(Y_tY_{t-k})=\phi_0E(Y_{t-k})+\phi_1 E(Y_{t-1}Y_{t-k})+E(\epsilon_tY_{t-k})\]
 Since \(\epsilon_t\) and \(Y_{t-k}\) are independent and using the
