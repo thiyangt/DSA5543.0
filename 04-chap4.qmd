@@ -11,7 +11,7 @@ $$X_t = \mu + \sum_{j=0}^{\infty} \psi_j \, \varepsilon_{t-j},$$
 
 or 
 
-$$X_t = \Psi(B)\epsilon_t$$
+$$X_t = \mu + \Psi(B)\epsilon_t$$
 
 where,
 
