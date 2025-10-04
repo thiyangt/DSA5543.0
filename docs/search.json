@@ -1,0 +1,242 @@
+[
+  {
+    "objectID": "04-chap4.html",
+    "href": "04-chap4.html",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "",
+    "text": "4.1 General Linear Process\nIn this chapter we will discuss family of autoregressive moving average (ARMA) time series models.\nA is a time series written as an infinite linear combination of random shocks \\{\\varepsilon_t\\}:\nX_t = \\mu + \\sum_{j=0}^{\\infty} \\psi_j \\, \\varepsilon_{t-j},\nwhere,\n\\mu is the mean\n\\{\\psi_j\\} are coefficients (weights)\n\\varepsilon_t \\sim \\text{i.i.d. } (0, \\sigma^2) are white noise shocks.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#moving-average-processes",
+    "href": "04-chap4.html#moving-average-processes",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.2 Moving Average Processes",
+    "text": "4.2 Moving Average Processes\nIf only finitely many coefficients \\psi_j are nonzero, say up to lag q, then we have an MA(q) process:\nX_t = \\mu + \\varepsilon_t + \\theta_1 \\varepsilon_{t-1} + \\dots + \\theta_q \\varepsilon_{t-q},\nwhere:\n\n\\mu is the mean,\n\\varepsilon_t \\sim \\text{i.i.d. }(0, \\sigma^2) are white noise shocks,\n\\theta_1, \\dots, \\theta_q are the MA coefficients.\n\nSo we can write:\n\\text{MA}(q) \\subset \\text{Linear Process}.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#autoregressive-processes",
+    "href": "04-chap4.html#autoregressive-processes",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.3 Autoregressive Processes",
+    "text": "4.3 Autoregressive Processes\nY_t = \\alpha + \\phi_1 Y_{t-1} + \\phi_2 Y_{t-2} + \\dots + \\phi_p Y_{t-p} + \\epsilon_t\nWhere:\nY_t is the value at time t\n\\alpha is a constant,\n\\phi_1, \\phi_2,...\\phi_p are the parameters,\n\\epsilon_t is white noise (error term),\np is the order of the AR model.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#ar-processes-are-also-just-special-cases-of-the-general-linear-process",
+    "href": "04-chap4.html#ar-processes-are-also-just-special-cases-of-the-general-linear-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.4 AR processes are also just special cases of the general linear process",
+    "text": "4.4 AR processes are also just special cases of the general linear process\nIf the AR process is causal (i.e., roots of the characteristic polynomial lie outside the unit circle), then it can be written as an infinite linear process:\nX_t = \\sum_{j=0}^{\\infty} \\psi_j \\, \\varepsilon_{t-j},\nwhere:\n\n\\varepsilon_t \\sim \\text{i.i.d. }(0, \\sigma^2) are white noise shocks,\n\\psi_j are coefficients determined from the AR parameters.\n\nAR(p) Process as an Infinite Linear Process Using Backshift Operator\nStart with the AR(p) process:\nX_t = \\phi_1 X_{t-1} + \\phi_2 X_{t-2} + \\dots + \\phi_p X_{t-p} + \\varepsilon_t,\nwhere \\varepsilon_t \\sim \\text{i.i.d. }(0, \\sigma^2) are white noise shocks.\n1. Define the backshift operator (B)\nB X_t = X_{t-1}, \\quad B^2 X_t = X_{t-2}, \\dots, B^p X_t = X_{t-p}.\n2. Rewrite the AR(p) process using (B)\nX_t - \\phi_1 B X_t - \\phi_2 B^2 X_t - \\dots - \\phi_p B^p X_t = \\varepsilon_t\nFactor out X_t:\n(1 - \\phi_1 B - \\phi_2 B^2 - \\dots - \\phi_p B^p) X_t = \\varepsilon_t\nDefine the AR polynomial:\n\\phi(B) = 1 - \\phi_1 B - \\phi_2 B^2 - \\dots - \\phi_p B^p\nThen the AR(p) process becomes:\n\\phi(B) X_t = \\varepsilon_t\n3. Express as an infinite linear process\nIf the AR process is causal (roots of \\phi(z)=0 lie outside the unit circle), we can invert the operator:\nX_t = \\phi(B)^{-1} \\varepsilon_t\nExpanding gives:\nX_t = \\sum_{j=0}^{\\infty} \\psi_j \\, \\varepsilon_{t-j},\nwhere the coefficients \\psi_j are determined recursively from the AR parameters \\phi_1, \\dots, \\phi_p.\nThis shows that causal AR processes are special cases of the general linear process.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#in-class-properties-of-ar1-process",
+    "href": "04-chap4.html#in-class-properties-of-ar1-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.5 In-class: Properties of AR(1) process",
+    "text": "4.5 In-class: Properties of AR(1) process\nDerive\n\nMean\nVariance\nCovariance\nAutocorrelation function of an AR(1) process",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#in-class-properties-of-ar2-process",
+    "href": "04-chap4.html#in-class-properties-of-ar2-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.6 In-class: Properties of AR(2) process",
+    "text": "4.6 In-class: Properties of AR(2) process\nDerive\n\nMean\nVariance\nCovariance\nAutocorrelation function of an AR(1) process",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#in-class-properties-of-arp-process",
+    "href": "04-chap4.html#in-class-properties-of-arp-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.7 In-class: Properties of AR(P) process",
+    "text": "4.7 In-class: Properties of AR(P) process\nDerive\n\nMean\nVariance\nCovariance\nAutocorrelation function of an AR(P) process",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-ar1-model",
+    "href": "04-chap4.html#properties-of-ar1-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.8 Properties of AR(1) model",
+    "text": "4.8 Properties of AR(1) model\nConsider the following AR(1) model.\n\\begin{equation}\nY_t=\\phi_0+\\phi_1Y_{t-1}+\\epsilon_{t}\n\\end{equation}\nwhere {\\epsilon_t} is assumed to be a white noise process with mean zero and variance \\sigma^2.\nMean\nAssuming that the series is weak stationary, we have E(Y_t)=\\mu, Var(Y_t)=\\gamma_0, and Cov(Y_t, Y_{t-k})=\\gamma_k, where \\mu and \\gamma_0 are constants. Given that {\\epsilon_t} is a white noise, we have E(\\epsilon_t)=0. The mean of AR(1) process can be computed as follows:\n\n\\begin{aligned}\n  E(Y_t) &= E(\\phi_0+\\phi_1 Y_{t-1}) \\\\\n         &= E(\\phi_0) +E(\\phi_1 Y_{t-1}) \\\\\n         &= \\phi_0 +\\phi_1 E(Y_{t-1}). \\\\\n\\end{aligned}\n\nUnder the stationarity condition, E(Y_t)=E(Y_{t-1})=\\mu. Thus we get\n\\mu = \\phi_0+\\phi_1\\mu.\nSolving for \\mu yields\n\\begin{equation}\nE(Y_t)=\\mu=\\frac{\\phi_0}{1-\\phi_1}.\n\\end{equation}\nThe results has two constraints for Y_t. First, the mean of Y_t exists if \\phi_1 \\neq 1 . The mean of Y_t is zero if and only if \\phi_0=0.\nVariance and the stationary condition of AR (1) process\nFirst take variance of both sides of Equation ?eq-ar\nVar(Y_t)=Var(\\phi_0+\\phi_1 Y_{t-1}+\\epsilon_t)\nThe Y_{t-1} occurred before time t. The \\epsilon_t does not depend on any past observation. Hence, cov(Y_{t-1}, \\epsilon_t)= 0. Furthermore, {\\epsilon_t} is a white noise. This gives\nVar(Y_t)=\\phi_1^2 Var(Y_{t-1})+\\sigma^2.\nUnder the stationarity condition, Var(Y_t)=Var(Y_{t-1}). Hence,\nVar(Y_t)=\\frac{\\sigma^2}{1-\\phi_1^2}.\nprovided that \\phi_1^2 &lt; 1 or |\\phi_1| &lt; 1 (The variance of a random variable is bounded and non-negative). The necessary and sufficient condition for the AR(1) model in Equation ?eq-ar to be weakly stationary is |\\phi_1| &lt; 1. This condition is equivalent to saying that the root of 1-\\phi_1B = 0 must lie outside the unit circle. This can be explained as below\nUsing the backshift notation we can write AR(1) process as\nY_t = \\phi_0 + \\phi_1BY_{t} + \\epsilon_t.\nThen we get\n(1-\\phi_1B)Y_t=\\phi_0 + \\epsilon_t. The AR(1) process is said to be stationary if the roots of (1-\\phi_1B)=0 lie outside the unit circle.\nCovariance\nThe covariance \\gamma_k=Cov(Y_t, Y_{t-k}) is called the lag-k autocovariance of Y_t. The two main properties of \\gamma_k: (a) \\gamma_0=Var(Y_t) and (b) \\gamma_{-k}=\\gamma_{k}.\nThe lag-k autocovariance of Y_t is\n\\begin{equation}\n\\begin{aligned}\n  \\gamma_k &= Cov(Y_t, Y_{t-k}) \\\\\n         &= E[(Y_t-\\mu)(Y_{t-k}-\\mu)] \\\\\n         &= E[Y_tY_{t-k}-Y_t\\mu-\\mu Y_{t-k} +\\mu^2] \\\\\n         &= E(Y_t Y_{t-k}) - \\mu^2. \\\\\n\\end{aligned}\n\\end{equation}\nNow we have\n\\begin{equation}\n  E(Y_t Y_{t-k}) = \\gamma_k + \\mu^2\n\\end{equation}\nAutocorrelation function of an AR(1) process\nTo derive autocorrelation function of an AR(1) process we first multiply both sides of Equation ?eq-ar by Y_{t-k} and take expected values:\nE(Y_tY_{t-k})=\\phi_0E(Y_{t-k})+\\phi_1 E(Y_{t-1}Y_{t-k})+E(\\epsilon_tY_{t-k}) Since \\epsilon_t and Y_{t-k} are independent and using the results in Equation ?eq-3\n\\gamma_k + \\mu^2 = \\phi_0 \\mu+\\phi_1(\\gamma_{k-1}+\\mu^2)\nSubstituting the results in Equation ?eq-2 to Equation ?eq-3 we get\n\\begin{equation}\n\\gamma_k = \\phi_1 \\gamma_{k-1}.\n\\end{equation}\nThe autocorrelation function, \\rho_k, is defined as\n\\rho_k = \\frac{\\gamma_k}{\\gamma_0}.\nSetting k=1, we get \\gamma_1 = \\phi_1\\gamma_0. Hence,\n\\rho_1=\\phi_1.\nSimilarly with k=2, \\gamma_2 = \\phi_1 \\gamma_1. Dividing both sides by \\gamma_0 and substituting with \\rho_1=\\phi_1 we get\n\\rho_2=\\phi_1^2.\nNow it is easy to see that in general\n\\begin{equation}\n\\rho_k = \\frac{\\gamma_k}{\\gamma_0}=\\phi_1^k\n\\end{equation}\nfor k=0, 1, 2, 3, ....\nSince |\\phi_1| &lt; 1, the autocorrelation function is an exponentially decreasing as the number of lags k increases. There are two features in the ACF of AR(1) process depending on the sign of \\phi_1. They are,\n\nIf 0 &lt; \\phi_1 &lt; 1, all correlations are positive.\nif -1 &lt; \\phi_1 &lt; 0, the lag 1 autocorrelation is negative (\\rho_1=\\phi_1) and the signs of successive autocorrelations alternate from positive to negative with their magnitudes decreasing exponentially.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-ar2-model",
+    "href": "04-chap4.html#properties-of-ar2-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.9 Properties of AR(2) model",
+    "text": "4.9 Properties of AR(2) model\nNow consider a second-order autoregressive process (AR(2))\n\\begin{equation}\nY_t=\\phi_0+\\phi_1Y_{t-1}+\\phi_2Y_{t-2}+\\epsilon_t.\n\\end{equation}\nMean\nQuestion 1: Using the same technique as that of the AR(1), show that\nE(Y_t) = \\mu = \\frac{\\phi_0}{1-\\phi_1 - \\phi_2} and the mean of Y_t exists if \\phi_1 + \\phi_2 \\neq 1.\nVariance\nQuestion 2: Show that Var(Y_t) = \\frac{(1-\\phi_2)\\sigma^2}{(1+\\phi_2)((1+\\phi_2)^2-\\phi_1^2)}.\nHere is a guide to the solution\nStart with\nVar(Y_t)=Var(\\phi_0+\\phi_1Y_{t-1}+\\phi_2Y_{t-2}+\\epsilon_t)\nSolve it until you obtain the Eq. (a) as shown below.\n\\begin{equation}\n\\gamma_0 (1-\\phi_1^2 - \\phi_2^2) = 2\\phi_1\\phi_2\\gamma_1+\\sigma^2.\n\\end{equation}\nNext multiply both sides of Equation ?eq-ar2 by Y_{t-1} and obtain an expression for \\gamma_1. Let’s call this Eq. (b).\nSolve Eq. (a) and (b) for \\gamma_0.\nStationarity of AR(2) process\nTo discuss the stationarity condition of the AR(2) process we use the roots of the characteristic polynomial. Here is the illustration.\nUsing the backshift notation we can write AR(2) process as\nY_t = \\phi_0 + \\phi_1 BY_{t} + \\phi_2 B^2 Y_{t} + \\epsilon_t.\nFurthermore, we get\n(1-\\phi_1 B - \\phi_2 B^2) Y_t = \\phi_0 + \\epsilon_t.\nThe characteristic polynomial of AR(2) process is\n\\Phi(B)=1-\\phi_1 B - \\phi_2 B^2.\nand the corresponding AR characteristic equation\n1-\\phi_1 B - \\phi_2 B^2=0.\nFor stationarity, the roots of AR characteristic equation must lie outside the unit circle. The two roots of the AR characteristic equation are\n\\frac{\\phi_1 \\pm \\sqrt{\\phi_1^2 + 4\\phi_2}}{-2\\phi_2}\nUsing algebraic manipulation, we can show that these roots will exceed 1 in modulus if and only if simultaneously \\phi_1 + \\phi_2 &lt; 1, \\phi_2-\\phi_1 &lt; 1, and |\\phi_2| &lt; 1. This is called the stationarity condition of AR(2) process.\nAutocorrelation function of an AR(2) process\nTo derive autocorrelation function of an AR(2) process we first multiply both sides of Equation ?eq-ar2 by Y_{t-k} and take expected values:\n\\begin{align}\nE(Y_tY_{t-k}) &= E(\\phi_0Y_{t-k}+\\theta_1Y_{t-1}Y_{t-k}+\\theta_2Y_{t-2}Y_{t-k})+\\epsilon_tY_{t-k} \\\\\n&= \\phi_0 E(Y_{t-k})+\\phi_{1}E(Y_{t-1}Y_{t-k}) + \\phi_2 E(Y_{t-2} Y_{t-k}) + E(\\epsilon_tY_{t-k}).\n\\end{align}\nUsing the independence between \\epsilon_t and Y_{t-1}, E(\\epsilon_t Y_{t-k})=0 and the results in Equation ?eq-3 (This is valid for AR(2)) we have\n\\gamma_k + \\mu^2 = \\gamma_0 \\mu + \\theta_1 (\\gamma_{k-1}+\\mu^2)+\\phi_2 (\\gamma_{k-2}+\\mu^2).\n(Note that E(X_{t-1}X_{t-k})=E(X_{t-1}X_{(t-1)-(k-1)}=\\gamma_{k-1}))\nSolving for \\gamma_k we get\n\\begin{align}\n\\gamma_k=\\phi_1\\gamma_{k-1}+\\phi_2\\gamma_{k-2}.\n\\end{align}\nBy dividing the both sides of Equation ?eq-eq9 by \\gamma_0, we have\n\\begin{align}\n\\rho_k=\\phi_1\\rho_{k-1}+\\phi_2\\rho_{k-2}.\n\\end{align}\nfor k&gt;0.\nSetting k=1 and using \\rho_0=1 and \\rho_{-1}=\\rho_1, we get the Yule-Walker equation for AR(2) process.\n\\rho_1=\\phi_1+\\phi_2 \\rho_1 or\n\\rho_1 = \\frac{\\phi_1}{1-\\phi_2}.\nSimilarly, we can show that\n\\rho_2 = \\frac{\\phi_2(1-\\phi_2)+\\phi_1^2}{(1-\\phi_2)}.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-arp-model",
+    "href": "04-chap4.html#properties-of-arp-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.10 Properties of AR(p) model",
+    "text": "4.10 Properties of AR(p) model\nThe pth order autoregressive model can be written as\n\\begin{align}\nY_t = \\phi_0 + \\phi_1Y_{t-1}+\\phi_2 Y_{t-2}+ ... + \\phi_p Y_{t-p}+\\epsilon_t.\n\\end{align}\nThe AR characteristic equation is\n1-\\phi_1B-\\phi_2B^2-...-\\phi_pB^p=0.\nFor stationarity of AR(p) process, the p roots of the AR characteristic must lie outside the unit circle.\nMean\nQuestion 3:  Find E(Y_t) of AR(p) process.\nVariance\nQuestion 4:  Find Var(Y_t) of AR(p) process.\nAutocorrelation function (ACF) of an AR(p) process\nQuestion 5:  Similar to the results in Equation ?eq-yule2 for AR(2) process, obtain the following recursive relationship for AR(p).\n\\begin{align}\n\\rho_k = \\phi_1\\rho_{k-1}+\\phi_2 \\rho_{k-2} + ... + \\phi_p \\rho_{k-p}.\n\\end{align}\nSetting k=1, 2, ..., p into Equation ?eq-yulep and using \\rho_0=1 and \\rho_{-k}=\\rho_k, we get the Yule-Walker equations for AR(p) process\n\\begin{equation}\n\\begin{aligned}\n  \\rho_1 &= \\phi_1+\\phi_2 \\rho_{1} + ... + \\phi_p \\rho_{p-1}\\\\\n  \\rho_2 &= \\phi_1 \\rho_1+\\phi_2  + ... + \\phi_p \\rho_{p-2}\\\\\n  ... \\\\\n  \\rho_p &= \\phi_1 \\rho_{p-1} +\\phi_2 \\rho_{p-2}  + ... + \\phi_p \\\\\n\\end{aligned}\n\\end{equation}\nThe Yule-Walker equations in ?eq-13 can be written in matrix form as below.\n\\left[\\begin{array}\n{r}\n\\rho_1  \\\\\n\\rho_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\rho_p\n\\end{array}\\right] = \\left[\\begin{array}\n{rrrrrrr}\n1 & \\rho_1 & \\rho_2 & .&.&.& \\rho_{p-1} \\\\\n\\rho_1 & 1 & \\rho_1 & .&.&.& \\rho_{p-2} \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n\\rho_{p-1} & \\rho_{p-2} & \\rho_{p-3} & .&.&.& 1 \\\\\n\\end{array}\\right] \\left[\\begin{array}\n{r}\n\\phi_1  \\\\\n\\phi_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\phi_p\n\\end{array}\\right]\n\nor\n\\bm{\\rho_p}=\\bm{P_p\\phi}.\nwhere,\n\\bm{\\rho_p} = \\left[\\begin{array}\n{r}\n\\rho_1  \\\\\n\\rho_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\rho_p\n\\end{array}\\right], \\bm{P_p} = \\left[\\begin{array}\n{rrrrrrr}\n1 & \\rho_1 & \\rho_2 & .&.&.& \\rho_{p-1} \\\\\n\\rho_1 & 1 & \\rho_1 & .&.&.& \\rho_{p-2} \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n\\rho_{p-1} & \\rho_{p-2} & \\rho_{p-3} & .&.&.& 1 \\\\\n\\end{array}\\right], \\bm{\\phi} = \\left[\\begin{array}\n{r}\n\\phi_1  \\\\\n\\phi_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\phi_p\n\\end{array}\\right]\nThe parameters can be estimated using\n\\bm{\\phi}=\\bm{P_p^{-1}\\rho_p}.\nQuestion 6: Obtain the parameters of an AR(3) process whose first autocorrelations are \\rho_1=0.9; \\rho_2=0.9; \\rho_3=0.5. Is the process stationary?",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#the-partial-autocorrelation-function-pacf",
+    "href": "04-chap4.html#the-partial-autocorrelation-function-pacf",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.11 The partial autocorrelation function (PACF)",
+    "text": "4.11 The partial autocorrelation function (PACF)\nLet \\phi_{ki}, the jth coefficient in an AR(k) model. Then, \\phi_{kk} is the last coefficient. From Equation ?eq-yulep, the \\phi_{kj} satisfy the set of equations\n\\begin{equation}\n\\rho_j=\\phi_{k1}\\rho_{j-1}+...+\\phi_{k(k-1)}\\rho_{j-k+1}+\\phi_{kk}\\rho_{j-k},\n\\end{equation}\nfor j=1, 2, ...k, leading to the Yule-Walker equations which may be written\n\\begin{equation}\n\\left[\\begin{array}\n{r}\n\\rho_1  \\\\\n\\rho_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\rho_k\n\\end{array}\\right] = \\left[\\begin{array}\n{rrrrrrr}\n1 & \\rho_1 & \\rho_2 & .&.&.& \\rho_{k-1} \\\\\n\\rho_1 & 1 & \\rho_1 & .&.&.& \\rho_{k-2} \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n\\rho_{k-1} & \\rho_{k-2} & \\rho_{k-3} & .&.&.& 1 \\\\\n\\end{array}\\right] \\left[\\begin{array}\n{r}\n\\phi_{k1}  \\\\\n\\phi_{k2}  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\phi_{kk}\n\\end{array}\\right]\n\\end{equation}\nor\n\\bm{\\rho_k}=\\bm{P_k\\phi_k}.\nwhere\n\\bm{\\rho_k} = \\left[\\begin{array}\n{r}\n\\rho_1  \\\\\n\\rho_2  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\rho_k\n\\end{array}\\right], \\bm{P_k} =\\left[\\begin{array}\n{rrrrrrr}\n1 & \\rho_1 & \\rho_2 & .&.&.& \\rho_{k-1} \\\\\n\\rho_1 & 1 & \\rho_1 & .&.&.& \\rho_{k-2} \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n. & . & . & .&.&.& . \\\\\n\\rho_{k-1} & \\rho_{k-2} & \\rho_{k-3} & .&.&.& 1 \\\\\n\\end{array}\\right], \\bm{\\phi_k} = \\left[\\begin{array}\n{r}\n\\phi_{k1}  \\\\\n\\phi_{k2}  \\\\\n.\\\\\n.\\\\\n.\\\\\n\\phi_{kk}\n\\end{array}\\right]\nFor each k, we compute the coefficients \\phi_{kk}. Solving the equations for k=1, 2, 3... successively, we obtain\nFor k=1,\n\\begin{equation}\n\\phi_{11}=\\rho_1.\n\\end{equation}\nFor k=2,\n\\begin{equation}\n\\phi_{22}=\\frac{\\left[\\begin{array}\n{rr}\n1 & \\rho_2  \\\\\n\\rho_1 & \\rho_2  \\\\\n\\end{array}\\right]}{\\left[\\begin{array}\n{rr}\n1 & \\rho_1  \\\\\n\\rho_1 & 1  \\\\\n\\end{array}\\right]} = \\frac{\\rho_2-\\rho_1^2}{1-\\rho_1^2}\n\\end{equation}\nFor k=3,\n\\begin{equation}\n\\phi_{33}=\\frac{\\left[\\begin{array}\n{rrr}\n1 & \\rho_1 & \\rho_1  \\\\\n\\rho_1 & 1 & \\rho_2  \\\\\n\\rho_2 & \\rho_1 & \\rho_3  \\\\\n\\end{array}\\right]}{\\left[\\begin{array}\n{rrr}\n1 & \\rho_1 & \\rho_2  \\\\\n\\rho_1 & 1 & \\rho_1  \\\\\n\\rho_2 & \\rho_1 & 1  \\\\\n\\end{array}\\right]}\n\\end{equation}\nThe quantity \\phi_{kk} is called the partial autocorrelation at lag k and can be defined as \\phi_{kk}=Corr(Y_tY_{t-k}|Y_{t-1}, Y_{t-2},..., Y_{t-k+1}). The partial autocorrelation between Y_t and Y_{t-k} is the correlation between Y_t and Y_{t-k} after removing the effect of the intermediate variables Y_{t-1}, Y_{t-2}, ..., Y_{t-k+1}.\nIn general the determinant in the numerator of Equations ?eq-p1, ?eq-p2 and ?eq-p3 has the same elements as that in the denominator, but replacing the last column with \\bm{\\rho_k}= (\\rho_1, \\rho_2,...\\rho_k).\nPACF for AR(1) models\nFrom Equation ?eq-acfar1 we have\n\\rho_k=\\phi_1^k for k=0, 1, 2, 3,...\nHence, for k=1, the first partial autocorrelation coefficient is\n\\phi_{11}=\\rho_1=\\phi_1. From ?eq-p2 for k=2, the second partial autocorrelation coefficient is\n\\phi_{22}=\\frac{\\rho_2-\\rho_1^2}{1-\\rho_1^2}=\\frac{\\phi_1^2-\\phi_1^2}{1-\\phi_1^2} = 0.\nSimilarly, for AR(1) we can show that \\phi_{kk}=0 for all k &gt; 0. Hence, for AR(1) process the partial autocorrelation is non-zero for lag 1 which is the order of the process, but is zero for lags beyond the order 1.\nPACF for AR(2) model\nQuestion 7: For AR(2) process show that \\phi_{kk}=0 for all k&gt;2. Sketch the PACF of AR(2) process.\nPACF for AR(P) model\nIn general for AR(p) precess, the partial autocorrelation function \\phi_{kk} is non-zero for k less than or equal to p (the order of the process) and zero for all k greater than p. In other words, the partial autocorrelation function of a AR(p) process has a cut-off after lag p.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#moving-average-ma-models",
+    "href": "04-chap4.html#moving-average-ma-models",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.12 Moving average (MA) models",
+    "text": "4.12 Moving average (MA) models\nWe first derive the properties of MA(1) and MA(2) models and then give the results for the general MA(q) model.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-ma1-model",
+    "href": "04-chap4.html#properties-of-ma1-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.13 Properties of MA(1) model",
+    "text": "4.13 Properties of MA(1) model\nThe general form for MA(1) model is\n\\begin{equation}\nY_t = \\theta_0 + \\theta_1 \\epsilon_{t-1} + \\epsilon_t\n\\end{equation}\nwhere \\theta_0 is a constant and {\\epsilon_t} is a white noise series.\nMean\nQuestion 8: Show that E(Y_t) = \\theta_0.\nVariance\nQuestion 9: Show that Var(Y_t) = (1+\\theta_1^2)\\sigma^2.\nWe can see both mean and variance are time-invariant. MA models are finite linear combinations of a white noise sequence. Hence, MA processes are always weakly stationary.\nAutocorrelation function of an MA(1) process\nMethod 1\nTo obtain the autocorrelation function of MA(1), we first multiply both sides of Equation ?eq-ma1 by Y_{t-k} and take the expectation.\n\\begin{equation}\n\\begin{aligned}\nE[Y_tY_{t-k}] &= E[\\theta_0 Y_{t-k} + \\theta_1 \\epsilon_{t-1} Y_{t-k} + \\epsilon_t Y_{t-k}]\\\\\n&= \\theta_0 E(Y_{t-k}) + \\theta_1 E(\\epsilon_{t-1}Y_{t-k}) + E(\\epsilon_t Y_{t-k})\\\\\n\\end{aligned}\n\\end{equation}\nUsing the independence between \\epsilon_t and Y_{t-k} (future error and past observation) E(\\epsilon_t Y_{t-k}) = 0. Now we have\n\\begin{equation}\nE[Y_tY_{t-k}] = \\theta_0^2  + \\theta_1 E(\\epsilon_{t-1}Y_{t-k})\n\\end{equation}\nNow let’s obtain an expression for E[Y_t Y_{t-k}].\n\\begin{equation}\n\\begin{aligned}\n  \\gamma_k &= Cov(Y_t, Y_{t-k}) \\\\\n         &= E[(Y_t-\\theta_0)(Y_{t-k}-\\theta_0)] \\\\\n         &= E[Y_tY_{t-k}-Y_t\\theta_0-\\theta_0 Y_{t-k} +\\theta_0^2] \\\\\n         &= E(Y_t Y_{t-k}) - \\theta_0^2. \\\\\n\\end{aligned}\n\\end{equation}\nNow we have\n\\begin{equation}\n  E(Y_t Y_{t-k}) = \\gamma_k + \\theta_0^2.\n\\end{equation}\nUsing the Equations ?eq-ma1acfs2 and ?eq-covma1 we have\n\\begin{equation}\n  \\gamma_k = \\theta_0^2 - \\theta_0^2 + \\theta_1E(\\epsilon_{t-1}Y_{t-k}).\n\\end{equation}\nNow let’s consider the case k=1.\n\\begin{equation}\n  \\gamma_1 = \\theta_0^2 - \\theta_0^2 + \\theta_1E(\\epsilon_{t-1}Y_{t-1})\n\\end{equation}\nToday’s error and today’s value are dependent. Hence, E(\\epsilon_{t-1}Y_{t-1}) \\neq 0. We first need to identify E(\\epsilon_{t-1}Y_{t-1}).\n\\begin{equation}\n\\begin{aligned}\nE(\\epsilon_{t-1}Y_{t-1}) &= E(\\theta_0 \\epsilon_{t-1} + \\theta_1 \\epsilon_{t-2} \\epsilon_{t-1}+ \\epsilon_{t-1}^2)\\\\\n\\end{aligned}\n\\end{equation}\nSince, {\\epsilon_t} is a white noise process E(\\epsilon_{t-1}) = 0 and E(\\epsilon_{t-2} \\epsilon_{t-1}) = 0. Hence, we have\n\\begin{equation}\n\\begin{aligned}\nE(\\epsilon_{t-1}Y_{t-1}) &= E(\\epsilon_{t-1}^2)=\\sigma^2\\\\\n\\end{aligned}\n\\end{equation}\nSubstituting ?eq-covma5 in ?eq-covma3 we get\n\\gamma_1=\\theta_1\\sigma^2.\nFurthermore, \\gamma_0 = Var(Y_t)=  (1+\\theta_1^2)\\sigma^2. Hence\n\\rho_1=\\frac{\\gamma_1}{\\gamma_0}=\\frac{\\theta}{1+\\theta_1^2}.\nWhen k=2, from Equation ?eq-covma3 and E(\\epsilon_{t-1}Y_{k-2}) = 0 (future error and past observation) we get \\gamma_2=0. Hence \\rho_2=0. Similarly, we can show that\n\\gamma_k = \\rho_k=0 for all k \\geq 2.\nWe can see that the ACF of MA(1) process is zero, beyond the order of 1 of the process.\nMethod 2: By using the definition of covariance\n\\begin{equation}\n\\begin{aligned}\n\\gamma_1 = Cov(Y_t, Y_{t-1}) &= Cov(\\epsilon_t + \\theta_1 \\epsilon_{t-1}+ \\theta_0, \\epsilon_{t-1}+\\theta_1 \\epsilon_{t-2} + \\theta_0)\\\\\n&=Cov(\\theta_1 \\epsilon_{t-1}, \\epsilon_{t-1})\\\\\n&=\\theta_1 \\sigma^2.\n\\end{aligned}\n\\end{equation}\n\\begin{equation}\n\\begin{aligned}\n\\gamma_2=Cov(Y_t, Y_{t-2}) &= Cov(\\epsilon_t + \\theta_1 \\epsilon_{t-1}+ \\theta_0, \\epsilon_{t-2}+\\theta_1 \\epsilon_{t-3} + \\theta_0)\\\\\n&=0.\n\\end{aligned}\n\\end{equation}\nWe have \\gamma_0=\\sigma^2(1+\\theta_1^2), (Using the variance).\nHence\n\\rho_1=\\frac{\\gamma_1}{\\gamma_0}=\\frac{\\theta_1}{1+\\theta_1^2}.\nSimilarly we can show \\gamma_k=\\rho_k=0 for all k \\geq 2.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-ma2-model",
+    "href": "04-chap4.html#properties-of-ma2-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.14 Properties of MA(2) model",
+    "text": "4.14 Properties of MA(2) model\nAn MA(2) model is in the form\n\\begin{equation}\nY_t = \\theta_0 + \\theta_1 \\epsilon_{t-1} + \\theta_2 \\epsilon_{t-2} + \\epsilon_t\n\\end{equation}\nwhere \\theta_0 is a constant and {\\epsilon_t} is a white noise series.\nMean\nQuestion 10:  Show that E(Y_t) = \\theta_0.\nVariance\nQuestion 11:  Show that Var(Y_t) = \\sigma^2 (1+\\theta_1^2 + \\theta_2^2).\nAutocorrelation function of an MA(2) process\nQuestion 12: For MA(2) process show that,\n\\rho_1=\\frac{\\theta_1(1+\\theta_2)}{1+\\theta_1^2+\\theta_2^2}, \\rho_2 = \\frac{\\theta_2}{1+\\theta_1^2 + \\theta_2^2},\nand \\rho_k=0 for all k \\geq 3.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#properties-of-maq-model",
+    "href": "04-chap4.html#properties-of-maq-model",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.15 Properties of MA(q) model",
+    "text": "4.15 Properties of MA(q) model\n\\begin{equation}\nY_t = \\theta_0 + \\theta_1 \\epsilon_{t-1} + \\theta_2 \\epsilon_{t-2} +...+ \\theta_q \\epsilon_{t-q} +\\epsilon_t\n\\end{equation}\nwhere \\theta_0 is a constant and {\\epsilon_t} is a white noise series.\nMean\nQuestion 13: Show that the constant term of an MA model is the mean of the series (i.e. E(Y_t)=\\theta_0).\nVariance\nQuestion 14: Show that the variance of an MA model is Var(Y_t)=(1+\\theta_1^2+\\theta_2^2+...+\\theta_q^2)\\sigma^2.\nAutocorrelation function of an MA(q) process\nQuestion 15: Show that the autocorrelation function of a MA(q) process is zero, beyond the order of q of the process. In other words, the autocorrelation function of a moving average process has a cutoff after lag q.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#partial-autocorrelation-function-of-an-maq-process",
+    "href": "04-chap4.html#partial-autocorrelation-function-of-an-maq-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.16 Partial autocorrelation function of an MA(q) process",
+    "text": "4.16 Partial autocorrelation function of an MA(q) process\nThe partial autocorrelation functions for MA(q) models behave very much like the autocorrelation functions of AR(p) models. The PACF of MA models decays exponentially to zero, rather like ACF for AR model.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#dual-relation-between-ar-and-ma-process",
+    "href": "04-chap4.html#dual-relation-between-ar-and-ma-process",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.17 Dual relation between AR and MA process",
+    "text": "4.17 Dual relation between AR and MA process\nDual relation 1\nFirst we consider the relation AR(p) &lt;–&gt; MA(\\infty)\nLet AR(p) be a stationary AR model with order p. Then,\nY_t = \\phi_1Y_{t-1}+ \\phi_2Y_{t-2}+...+ \\phi_pY_{t-p}+\\epsilon_t, where \\epsilon_t \\sim WN(0, \\sigma^2).\nUsing the backshift operator we can write the AR(p) model as\n(1-\\phi_1B-\\phi_2B^2-...-\\phi_pB^P)Y_t=\\epsilon_t. Then\n\\phi(B)Y_t=\\epsilon_t, where \\phi(B)=1-\\phi_1B-\\phi_2B^2-...-\\phi_pB^p. Furthermore, Y_t can be written as infinite sum of previous \\epsilon’s as below\nY_t = \\phi^{-1}(B)\\epsilon_t, where \\phi(B)\\psi(B)=1 and \\psi(B)=1+\\Psi_1B+\\psi_2B^2+... Then Y_t=\\psi(B)\\epsilon_t. This is a representation of MA(\\infty) process.\nNext, we consider the relation MA(q) &lt;–&gt; AR(\\infty)\nLet MA(q) be invertible moving average process\nY_t = \\epsilon_t + \\theta_t\\epsilon_{t-1}+\\theta_2\\epsilon_{t-2}+...+\\theta_p\\epsilon_{t-q}.\nUsing the backshift operator we can write the MA(q) process as\nY_t = (1+\\theta_1B+\\theta_2B^2-...+\\theta_qB^q)\\epsilon_t.\nThen,\nY_t = \\theta(B)\\epsilon_t,\nwhere \\theta(B)=1+\\theta_1B+\\theta_2B^2+...+\\theta_1B^q. Hence, for an invertible moving average process, Y_t can be represented as a finite weighted sum of previous error terms, \\epsilon. Furthermore, since the process is invertible \\epsilon_t can be represented as an infinite weighted sum of previous Y’s as below\n\\epsilon_t=\\theta^{-1}(B)Y_t, where \\pi(B)\\theta(B)=1, and \\pi(B) = 1+\\pi_1B+\\pi B^2+.... Hence,\n\\epsilon_t = \\pi(B)Y_t. This is an representation of a AR(\\infty) process.\nDual relation 2\nAn MA(q) process has an ACF function that is zero beyond lag q and its PACF is decays exponentially to 0. Consequently, an AR(p) process has an PACF that is zero beyond lag-p, but its ACF decays exponentially to 0.\nDual relation 3\nFor an AR(p) process the roots of \\phi(B)=0 must lie outside the unit circle to satisfy the condition of stationarity. However, the parameters of the AR(p) are not required to satisfy any conditions to ensure invertibility. Conversely, the parameters of the MA process are not required to satisfy any condition to ensure stationarity. However, to ensure the condition of invertibility, the roots of \\theta(B)=0 must lie outside the unit circle.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#autoregressive-and-moving-average-arma-models",
+    "href": "04-chap4.html#autoregressive-and-moving-average-arma-models",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.18 Autoregressive and Moving-average (ARMA) models",
+    "text": "4.18 Autoregressive and Moving-average (ARMA) models\ncurrent value = linear combination of past values + linear combination of past error + current error\nThe ARMA(p, q) can be written as\nY_t=c+\\phi_1 Y_{t-1}+\\phi_2 Y_{t-2}+...+\\phi_p Y_{t-p}+\\theta_1\\epsilon_{t-1}+\\theta_2\\epsilon_{t-2}+...+\\theta_q\\epsilon_{t-q}+\\epsilon_t, where \\{\\epsilon_t\\} is a white noise process.\nUsing the back shift operator\n\\phi(B)Y_t=\\theta(B)\\epsilon_t, where \\phi(.) and \\theta(.) are the pth and qth degree polynomials,\n\\phi(B)=1-\\phi_1 \\epsilon -...-\\phi_p \\epsilon^p, and \\theta(B)=1+\\theta_1\\epsilon+...+\\theta_q\\epsilon^q.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#stationary-condition",
+    "href": "04-chap4.html#stationary-condition",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.19 Stationary condition",
+    "text": "4.19 Stationary condition\nRoots of \\phi(B)=0 lie outside the unit circle.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#invertible-condition",
+    "href": "04-chap4.html#invertible-condition",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.20 Invertible condition",
+    "text": "4.20 Invertible condition\nRoots of \\theta(B)=0 lie outside the unit circle.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#autocorrelation-function-and-partial-autocorrelation-function",
+    "href": "04-chap4.html#autocorrelation-function-and-partial-autocorrelation-function",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.21 Autocorrelation function and Partial autocorrelation function",
+    "text": "4.21 Autocorrelation function and Partial autocorrelation function\nThe ACF of an ARMA model exhibits a pattern similar to that of an AR model. The PACF of ARMA process behaves like the PACF of a MA process. Hence, the ACF and PACF are not informative in determining the order of an ARMA model.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#theoretical-acf-and-pacf-for-ar-ma-and-arma-models",
+    "href": "04-chap4.html#theoretical-acf-and-pacf-for-ar-ma-and-arma-models",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.22 Theoretical ACF and PACF for AR, MA and ARMA models",
+    "text": "4.22 Theoretical ACF and PACF for AR, MA and ARMA models\nTheoretical autocorrelation coefficients for some of the more common AR, MA and ARMA models are shown here. However, the ACF and PACF calculated from the data will not exactly match any set of theoretical ACF and PACF because the ACF and PACF calculated from the data are subject to sampling variation.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#acf-and-pacf-calculated-from-data",
+    "href": "04-chap4.html#acf-and-pacf-calculated-from-data",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.23 ACF and PACF calculated from data",
+    "text": "4.23 ACF and PACF calculated from data\n\n\n\n\nACF and PACF of AR(1), MA(1) and ARMA(1, 1) models calculated from the data",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  },
+  {
+    "objectID": "04-chap4.html#references",
+    "href": "04-chap4.html#references",
+    "title": "\n4  Models For Stationary Time Series\n",
+    "section": "\n4.24 References",
+    "text": "4.24 References\nBox, G. E., Jenkins, G. M., Reinsel, G. C., & Ljung, G. M. (2015). Time series analysis: forecasting and control.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Models For Stationary Time Series</span>"
+    ]
+  }
+]
