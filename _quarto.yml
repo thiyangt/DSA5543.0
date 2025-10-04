@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Spatio-Temporal Data Analysis"
+  title: "DSA 554 3.0 Spatio-temporal Data Analysis"
   author: "Thiyanga S. Talagala"
   chapters:
     - text: "Front matter"
