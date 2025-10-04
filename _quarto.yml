@@ -1,0 +1,25 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Spatio-Temporal Data Analysis"
+  author: "Thiyanga S. Talagala"
+  chapters:
+    - text: "Front matter"
+      file: index.qmd
+    - "01-chap1.qmd"
+    - "02-chap2.qmd"
+    - "03-chap3.qmd"
+    - "04-chap4.qmd"
+    - "refs.qmd"
+  sidebar:
+    style: "docked"
+
+bibliography: thesisrefs.bib
+csl: american-statistical-association.csl
+
+
+format:
+  monashthesis-html: default
+  monashthesis-pdf: default
