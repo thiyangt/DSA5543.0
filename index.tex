@@ -3339,7 +3339,7 @@ Purpose
 .cpg & Encoding of text attributes (optional) \\
 \end{longtable}
 
-\section{R Example}\label{r-example}
+\section{R Example 1}\label{r-example-1}
 
 \begin{verbatim}
 Simple feature collection with 6 features and 168 fields
@@ -3557,6 +3557,570 @@ GEOGCRS["WGS 84",
             ANGLEUNIT["degree",0.0174532925199433]],
     ID["EPSG",4326]]
 \end{verbatim}
+
+\section{R Example 2}\label{r-example-2}
+
+\begin{verbatim}
+[1] "sf"         "tbl_df"     "tbl"        "data.frame"
+\end{verbatim}
+
+\begin{verbatim}
+Simple feature collection with 1 feature and 1 field
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 362203.3 ymin: 380301.9 xmax: 621918.1 ymax: 813560.9
+Projected CRS: SLD99 / Sri Lanka Grid 1999
+# A tibble: 1 x 2
+                                                                geometry COUNTRY
+                                                      <MULTIPOLYGON [m]> <chr>  
+1 (((481925.5 381353.7, 481922.9 381350.3, 481919 381348.2, 481914.6 38~ SRI LA~
+\end{verbatim}
+
+or
+
+\begin{verbatim}
+Coordinate Reference System:
+  User input: EPSG:5235 
+  wkt:
+PROJCRS["SLD99 / Sri Lanka Grid 1999",
+    BASEGEOGCRS["SLD99",
+        DATUM["Sri Lanka Datum 1999",
+            ELLIPSOID["Everest 1830 (1937 Adjustment)",6377276.345,300.8017,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",5233]],
+    CONVERSION["Sri Lanka Grid 1999",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",7.00047152777778,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",80.7717130833333,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",0.9999238418,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["(E)",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["(N)",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["Sri Lanka - onshore"],
+        BBOX[5.86,79.64,9.88,81.95]],
+    ID["EPSG",5235]]
+\end{verbatim}
+
+Visualizing using shapefiles: map of Sri Lanka
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-11-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-12-1.pdf}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+geometry & COUNTRY \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MULTIPOLYGON (((481925.5 38\ldots{} & SRI LANKA \\
+\end{longtable}
+
+\section{Exercise}\label{exercise-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Draw district and province maps
+\end{enumerate}
+
+data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{province}
+\NormalTok{district}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Guess the output.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Colour provinces according to the population.
+\end{enumerate}
+
+\section{Annotations}\label{annotations}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-16-1.pdf}}
+
+\section{Spatial Data Wrangling}\label{spatial-data-wrangling}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Convert regular data frame to sf
+\end{enumerate}
+
+\begin{verbatim}
+Coordinate Reference System:
+  User input: EPSG:4326 
+  wkt:
+GEOGCRS["WGS 84",
+    ENSEMBLE["World Geodetic System 1984 ensemble",
+        MEMBER["World Geodetic System 1984 (Transit)"],
+        MEMBER["World Geodetic System 1984 (G730)"],
+        MEMBER["World Geodetic System 1984 (G873)"],
+        MEMBER["World Geodetic System 1984 (G1150)"],
+        MEMBER["World Geodetic System 1984 (G1674)"],
+        MEMBER["World Geodetic System 1984 (G1762)"],
+        MEMBER["World Geodetic System 1984 (G2139)"],
+        MEMBER["World Geodetic System 1984 (G2296)"],
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]],
+        ENSEMBLEACCURACY[2.0]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    USAGE[
+        SCOPE["Horizontal component of 3D system."],
+        AREA["World."],
+        BBOX[-90,-180,90,180]],
+    ID["EPSG",4326]]
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Transforming coordinates
+\end{enumerate}
+
+\begin{verbatim}
+Coordinate Reference System:
+  User input: EPSG:32618 
+  wkt:
+PROJCRS["WGS 84 / UTM zone 18N",
+    BASEGEOGCRS["WGS 84",
+        ENSEMBLE["World Geodetic System 1984 ensemble",
+            MEMBER["World Geodetic System 1984 (Transit)"],
+            MEMBER["World Geodetic System 1984 (G730)"],
+            MEMBER["World Geodetic System 1984 (G873)"],
+            MEMBER["World Geodetic System 1984 (G1150)"],
+            MEMBER["World Geodetic System 1984 (G1674)"],
+            MEMBER["World Geodetic System 1984 (G1762)"],
+            MEMBER["World Geodetic System 1984 (G2139)"],
+            MEMBER["World Geodetic System 1984 (G2296)"],
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]],
+            ENSEMBLEACCURACY[2.0]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4326]],
+    CONVERSION["UTM zone 18N",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",0,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",-75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",0.9996,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["(E)",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["(N)",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Navigation and medium accuracy spatial referencing."],
+        AREA["Between 78°W and 72°W, northern hemisphere between equator and 84°N, onshore and offshore. Bahamas. Canada - Nunavut; Ontario; Quebec. Colombia. Cuba. Ecuador. Greenland. Haiti. Jamaica. Panama. Turks and Caicos Islands. United States (USA). Venezuela."],
+        BBOX[0,-78,84,-72]],
+    ID["EPSG",32618]]
+\end{verbatim}
+
+\begin{verbatim}
+Simple feature collection with 3 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -74.006 ymin: 35.6895 xmax: 139.6917 ymax: 51.5074
+Geodetic CRS:  WGS 84
+      name                 geometry
+1 New York  POINT (-74.006 40.7128)
+2   London  POINT (-0.1276 51.5074)
+3    Tokyo POINT (139.6917 35.6895)
+\end{verbatim}
+
+\begin{verbatim}
+Simple feature collection with 3 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -2693059 ymin: 4507351 xmax: 4935636 ymax: 15438700
+Projected CRS: WGS 84 / UTM zone 18N
+      name                  geometry
+1 New York  POINT (583959.4 4507351)
+2   London   POINT (4935636 8691571)
+3    Tokyo POINT (-2693059 15438701)
+\end{verbatim}
+
+\section{Two types of maps}\label{two-types-of-maps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simple feature map
+\item
+  Polygon maps
+\end{enumerate}
+
+\section{Simple feature map}\label{simple-feature-map}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-21-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-22-1.pdf}}
+
+\section{Polygon map}\label{polygon-map}
+
+Example 1
+
+\begin{verbatim}
+Simple feature collection with 1 feature and 0 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 0 ymin: 0 xmax: 1 ymax: 1
+CRS:           NA
+                        geometry
+1 POLYGON ((0 0, 0 1, 1 1, 1 ...
+\end{verbatim}
+
+\begin{verbatim}
+     X Y L1 L2
+[1,] 0 0  1  1
+[2,] 0 1  1  1
+[3,] 1 1  1  1
+[4,] 1 0  1  1
+[5,] 0 0  1  1
+\end{verbatim}
+
+\begin{verbatim}
+  X Y L1 L2
+1 0 0  1  1
+2 0 1  1  1
+3 1 1  1  1
+4 1 0  1  1
+5 0 0  1  1
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-23-1.pdf}}
+
+\begin{verbatim}
+Simple feature collection with 1 feature and 1 field
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 362203.3 ymin: 380301.9 xmax: 621918.1 ymax: 813560.9
+Projected CRS: SLD99 / Sri Lanka Grid 1999
+# A tibble: 1 x 2
+                                                                geometry COUNTRY
+                                                      <MULTIPOLYGON [m]> <chr>  
+1 (((481925.5 381353.7, 481922.9 381350.3, 481919 381348.2, 481914.6 38~ SRI LA~
+\end{verbatim}
+
+\begin{verbatim}
+                        geometry   COUNTRY
+1 MULTIPOLYGON (((481925.5 38... SRI LANKA
+\end{verbatim}
+
+Example 2
+
+\begin{verbatim}
+# A tibble: 6 x 4
+  fips  abbr  state_name pop_2022
+  <chr> <chr> <chr>         <dbl>
+1 01    AL    Alabama     5074296
+2 02    AK    Alaska       733583
+3 04    AZ    Arizona     7359197
+4 05    AR    Arkansas    3045637
+5 06    CA    California 39029342
+6 08    CO    Colorado    5839926
+\end{verbatim}
+
+\begin{verbatim}
+# A tibble: 6 x 12
+  fips  abbr  state_name pop_2022  long   lat order hole  piece group state_fips
+  <chr> <chr> <chr>         <dbl> <dbl> <dbl> <int> <lgl> <fct> <fct> <chr>     
+1 01    AL    Alabama     5074296 -88.5  31.9     1 FALSE 1     01.1  01        
+2 01    AL    Alabama     5074296 -88.5  31.9     2 FALSE 1     01.1  01        
+3 01    AL    Alabama     5074296 -88.5  31.9     3 FALSE 1     01.1  01        
+4 01    AL    Alabama     5074296 -88.5  32.0     4 FALSE 1     01.1  01        
+5 01    AL    Alabama     5074296 -88.5  32.0     5 FALSE 1     01.1  01        
+6 01    AL    Alabama     5074296 -88.5  32.1     6 FALSE 1     01.1  01        
+# i 1 more variable: state_abbv <chr>
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-27-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-28-1.pdf}}
+
+Example 3
+
+\begin{verbatim}
+        lon      lat group     id
+1 -83.88675 44.85686     1 alcona
+2 -83.36536 44.86832     1 alcona
+3 -83.36536 44.86832     1 alcona
+4 -83.33098 44.83968     1 alcona
+5 -83.30806 44.80530     1 alcona
+6 -83.30233 44.77665     1 alcona
+\end{verbatim}
+
+Plot: in class
+
+\section{rnaturalearth}\label{rnaturalearth}
+
+rnaturalearth is an R package that provides ready-to-use maps of the
+world, countries, and regions as sf (spatial) or data frames. It's a
+super convenient way to get geographic data without downloading
+shapefiles manually.
+
+Example 1
+
+\begin{verbatim}
+Simple feature collection with 6 features and 121 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 79.65577 ymin: 7.272089 xmax: 81.41668 ymax: 9.829576
+Geodetic CRS:  WGS 84
+                         featurecla scalerank adm1_code diss_me iso_3166_2
+1860 Admin-1 states provinces lakes         9  LKA-2454    2454      LK-53
+1861 Admin-1 states provinces lakes         9  LKA-2458    2458      LK-45
+1862 Admin-1 states provinces lakes         9  LKA-2459    2459      LK-41
+1863 Admin-1 states provinces lakes         9  LKA-2460    2460      LK-42
+1864 Admin-1 states provinces lakes         9  LKA-2457    2457      LK-43
+1865 Admin-1 states provinces lakes         9  LKA-2462    2462      LK-62
+     wikipedia iso_a2 adm0_sr          name            name_alt name_local
+1860      <NA>     LK       1 Trikuṇāmalaya         Trincomalee       <NA>
+1861      <NA>     LK       1       Mulativ Mulativu|Mullaitivu       <NA>
+1862      <NA>     LK       3      Yāpanaya              Jaffna       <NA>
+1863      <NA>     LK       1   Kilinŏchchi         Kilinochchi       <NA>
+1864      <NA>     LK       3     Mannārama              Mannar       <NA>
+1865      <NA>     LK       1     Puttalama            Puttalam       <NA>
+            type  type_en code_local code_hasc
+1860 Distrikkaya District       <NA>     LK.TC
+1861 Distrikkaya District       <NA>     LK.MP
+1862 Distrikkaya District       <NA>     LK.JA
+1863 Distrikkaya District       <NA>     LK.KL
+1864 Distrikkaya District       <NA>     LK.MB
+1865 Distrikkaya District       <NA>     LK.PX
+                                  note hasc_maybe            region region_cod
+1860                              <NA>       <NA> Næ̆gĕnahira paḷāta       LK-5
+1861                              <NA>       <NA>      Uturu paḷāta       LK-4
+1862 Split into Jaffna and Kilinochchi       <NA>      Uturu paḷāta       LK-4
+1863                              <NA>       <NA>      Uturu paḷāta       LK-4
+1864                              <NA>       <NA>      Uturu paḷāta       LK-4
+1865                              <NA>       <NA>    Vayamba paḷāta       LK-6
+     provnum_ne gadm_level check_me datarank abbrev postal area_sqkm sameascity
+1860      20013          1       10        6   <NA>     TC         0          7
+1861      20005          1       10        6   <NA>     MP         0        -99
+1862      20002          1       10        6   <NA>     JA         0        -99
+1863      20001          1        0        6   <NA>     KL         0        -99
+1864      20004          1       10        6   <NA>     MB         0        -99
+1865      20006          1       10        6   <NA>     PX         0        -99
+     labelrank name_len mapcolor9 mapcolor13 fips fips_alt   woe_id woe_label
+1860         7       13         4          9 CE21     <NA> 23706507      <NA>
+1861         9        7         4          9 CE27     <NA> 23706505      <NA>
+1862         9        8         4          9 CE25     <NA> 23706489      <NA>
+1863         9       11         4          9 <NA>     <NA> 23706490      <NA>
+1864         9        9         4          9 CE26     <NA> 23706506      <NA>
+1865         9        9         4          9 CE19     <NA> 23706502      <NA>
+        woe_name latitude longitude sov_a3 adm0_a3 adm0_label     admin
+1860 Trincomalee  8.56202   81.0848    LKA     LKA          2 Sri Lanka
+1861  Mullaitivu  9.24043   80.5667    LKA     LKA          2 Sri Lanka
+1862      Jaffna  9.50669   79.6933    LKA     LKA          2 Sri Lanka
+1863 Kilinochchi  9.38429   80.3341    LKA     LKA          2 Sri Lanka
+1864      Mannar  8.84371   80.0854    LKA     LKA          2 Sri Lanka
+1865    Puttalam  7.94944   79.9111    LKA     LKA          2 Sri Lanka
+      geonunit gu_a3   gn_id              gn_name   gns_id             gns_name
+1860 Sri Lanka   LKA 1226258 Trincomalee District -2237626 Trincomalee District
+1861 Sri Lanka   LKA 1234392 Mullaittivu District -2229490 Mullaittivu District
+1862 Sri Lanka   LKA 1242831      Jaffna District -2221042      Jaffna District
+1863 Sri Lanka   LKA 1240371 Kilinochchi District -2223504 Kilinochchi District
+1864 Sri Lanka   LKA 1236148      Mannar District -2227730      Mannar District
+1865 Sri Lanka   LKA 1229292    Puttalam District -2234591             Puttalam
+     gn_level gn_region gn_a1_code region_sub sub_code gns_level gns_lang
+1860        2      <NA> LK.1226258       <NA>     <NA>         2     <NA>
+1861        2      <NA> LK.1234392       <NA>     <NA>         2     <NA>
+1862        2      <NA> LK.1242831       <NA>     <NA>         2     <NA>
+1863        2      <NA> LK.1240371       <NA>     <NA>         2     <NA>
+1864        2      <NA> LK.1236148       <NA>     <NA>         2     <NA>
+1865        2      <NA> LK.1229292       <NA>     <NA>         2     <NA>
+     gns_adm1 gns_region min_label max_label min_zoom wikidataid
+1860     <NA>       CE37       8.7        11      8.7   Q1493318
+1861     <NA>       CE38       8.7        11      8.7   Q1587508
+1862     <NA>       CE38       8.7        11      8.7   Q1520182
+1863     <NA>       CE38       8.7        11      8.7   Q1584007
+1864     <NA>       CE38       8.7        11      8.7    Q178003
+1865     <NA>       CE32       8.7        11      8.7   Q1665318
+               name_ar        name_bn     name_de     name_en     name_es
+1860 مديرية ترينكومالي       ত্রিকুমালয় Trincomalee Trincomalee Trincomalee
+1861  مديرية مولايتيفو মোলাইতিবো জেলা  Mullaitivu  Mullaitivu  Mullaitivu
+1862      مديرية جافنا       ইয়াপানায়      Jaffna      Jaffna      Jaffna
+1863  مديرية كيلينوتشي ক্লিনোকাচি জেলা Kilinochchi Kilinochchi Kilinochchi
+1864       مديرية منار     মানার জেলা      Mannar      Mannar      Mannar
+1865    مديرية بوتالام   পোতালাম জেলা    Puttalam    Puttalam    Puttalam
+          name_fr        name_el         name_hi       name_hu       name_id
+1860 Trinquemalay Τρικουμαμαλάια त्रिंकोन्माली जिला Trikuṇāmalaya Trikuṇamalaya
+1861   Mullaitivu   Μουλαϊτιβούν      मुलैतिवु जिला    Mullaitivu    Mullaitivu
+1862       Jaffna      Γιαπανάια       जफ़ना जिला      Yāpanaya      Yapanaya
+1863  Kilinochchi      Κιλινότσι  किलिनोच्चि जिला   Kilinŏchchi   Kilinochchi
+1864       Mannar          Μανάρ      मन्नार जिला     Mannārama        Mannar
+1865     Puttalam      Πουτταλάμ      पुत्तलम जिला     Puttalama      Puttalam
+         name_it                name_ja       name_ko     name_nl       name_pl
+1860 Trincomalee       トリンコマリー県 트링코말리 구 Trincomalee Trikunamalaja
+1861  Mullaitivu ムッライッティーヴー県 물라이티부 구  Mullaitivu   Mullajttiwu
+1862      Jaffna             ジャフナ県     자프나 구      Jaffna        Dżafna
+1863 Kilinochchi           キリノッチ県 킬리노치치 구 Kilinochchi     Kilinoćći
+1864      Mannar           マンナール県     만나르 구      Mannar        Mannar
+1865    Puttalam           プッタラム県     푸탈람 구    Puttalam      Puttalam
+         name_pt          name_ru     name_sv       name_tr          name_vi
+1860 Trincomalee Тринкомали округ Trincomalee Trikuṇāmalaya      Trincomalee
+1861 Mullaittivu       Муллайтиву  Mullaitivu    Mullaitivu  Quận Mullaitivu
+1862      Jaffna     округ Джафна      Jaffna      Yāpanaya         Yāpanaya
+1863 Kilinochchi        Килиноччи Kilinochchi   Kilinochchi Quận Kilinochchi
+1864      Mannar           Маннар      Mannar        Mannar      Quận Mannar
+1865    Puttalam         Путталам    Puttalam      Puttalam    Quận Puttalam
+        name_zh      ne_id      name_he    name_uk        name_ur
+1860 亭可馬里區 1159311407 טריקונהמלאיה Трінкомалі ترینکومالی ضلع
+1861 穆莱蒂武区 1159311415        מולטה Муллайтіву  مولایتیوو ضلع
+1862   贾夫纳区 1159311395     יאפאנאיה     Джафна       جففناضلع
+1863 基利诺奇区 1159311417     קילינצ'י  Кіліноччі  کیلینوچچی ضلع
+1864   马纳尔区 1159311387     האי מנסל     Маннар      مانار ضلع
+1865 普塔勒姆区 1159311421     פוטאלאמה   Путталам    پوٹالام ضلع
+              name_fa   name_zht FCLASS_ISO FCLASS_US FCLASS_FR FCLASS_RU
+1860 ناحیه ترینکومالی 亭可馬里區       <NA>      <NA>      <NA>      <NA>
+1861  ناحیه مولایتیوو 穆萊蒂武區       <NA>      <NA>      <NA>      <NA>
+1862       ناحیه جفنا   賈夫納區       <NA>      <NA>      <NA>      <NA>
+1863   ناحیه کیلینوچی 基利諾奇區       <NA>      <NA>      <NA>      <NA>
+1864       ناحیه منار   馬納爾區       <NA>      <NA>      <NA>      <NA>
+1865    ناحیه پوتالام 普塔勒姆區       <NA>      <NA>      <NA>      <NA>
+     FCLASS_ES FCLASS_CN FCLASS_TW FCLASS_IN FCLASS_NP FCLASS_PK FCLASS_DE
+1860      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1861      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1862      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1863      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1864      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1865      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+     FCLASS_GB FCLASS_BR FCLASS_IL FCLASS_PS FCLASS_SA FCLASS_EG FCLASS_MA
+1860      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1861      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1862      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1863      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1864      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1865      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+     FCLASS_PT FCLASS_AR FCLASS_JP FCLASS_KO FCLASS_VN FCLASS_TR FCLASS_ID
+1860      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1861      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1862      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1863      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1864      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1865      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+     FCLASS_PL FCLASS_GR FCLASS_IT FCLASS_NL FCLASS_SE FCLASS_BD FCLASS_UA
+1860      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1861      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1862      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1863      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1864      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+1865      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>      <NA>
+     FCLASS_TLC                       geometry
+1860       <NA> MULTIPOLYGON (((80.92292 8....
+1861       <NA> MULTIPOLYGON (((80.62598 9....
+1862       <NA> MULTIPOLYGON (((80.44174 9....
+1863       <NA> MULTIPOLYGON (((80.29067 9....
+1864       <NA> MULTIPOLYGON (((79.91278 8....
+1865       <NA> MULTIPOLYGON (((79.82789 7....
+\end{verbatim}
+
+Example 2
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-31-1.pdf}}
+
+\section{Practical}\label{practical}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Mark following locations on the map
+\end{enumerate}
+
+Help:
+
+\begin{verbatim}
+Simple feature collection with 9 features and 1 field
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 105.5507 ymin: -43.63203 xmax: 167.9969 ymax: -9.229287
+Geodetic CRS:  GDA94
+# A tibble: 9 x 2
+  NAME                                                                  geometry
+* <chr>                                                       <MULTIPOLYGON [°]>
+1 New South Wales              (((150.7016 -35.12286, 150.6611 -35.11782, 150.6~
+2 Victoria                     (((146.6196 -38.70196, 146.6721 -38.70259, 146.6~
+3 Queensland                   (((148.8473 -20.3457, 148.8722 -20.37575, 148.85~
+4 South Australia              (((137.3481 -34.48242, 137.3749 -34.46885, 137.3~
+5 Western Australia            (((126.3868 -14.01168, 126.3625 -13.98264, 126.3~
+6 Tasmania                     (((147.8397 -40.29844, 147.8902 -40.30258, 147.8~
+7 Northern Territory           (((136.3669 -13.84237, 136.3339 -13.83922, 136.3~
+8 Australian Capital Territory (((149.2317 -35.222, 149.2346 -35.24047, 149.271~
+9 Other Territories            (((167.9333 -29.05421, 167.9188 -29.0344, 167.93~
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Projecting your data
+\end{enumerate}
 
 \bookmarksetup{startatroot}
 

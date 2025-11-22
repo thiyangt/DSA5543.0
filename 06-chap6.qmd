@@ -134,7 +134,7 @@ Visit [here](https://johnedevans.files.wordpress.com/2019/01/map-projections-exp
 
 ## Example maps
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
+```{r, warning=FALSE, message=FALSE, echo=TRUE}
 library(tidyverse)
 library(sf)
 library(rnaturalearth)
@@ -148,7 +148,7 @@ p1 <- ggplot(data = world)+
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=20, fig.height=15}
+```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=20, fig.height=15, echo=TRUE}
 p2 <- ggplot(data = world)+
   geom_sf()+
   labs(title = 'ESRI:54009: Mollweide projection')+             theme(plot.title = element_text(face = "bold"))+
@@ -167,7 +167,7 @@ p4 <- ggplot(data = world)+
  
 ```
 
-```{r}
+```{r, echo=TRUE}
 p1
 p2
 p3
@@ -299,7 +299,7 @@ A shapefile actually consists of several files that work together. The main ones
 
 ## R Example 1
 
-```{r}
+```{r, echo=TRUE}
 library(sf)
 library(rnaturalearth)
 
@@ -319,49 +319,43 @@ world_utm <- st_transform(world, crs = 32633)
 
 ## R Example 2
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
 # install.packages("devtools")
-devtools::install_github("thiyangt/ceylon")
+# devtools::install_github("thiyangt/ceylon")
 library(ceylon)
 library(tidyverse)
 library(sp)
+library(sf)
 library(viridis)
 ```
 
-```{r}
+```{r, echo=TRUE}
 data(sf_sl_0)
 class(sf_sl_0)
-# work with spatial data; sp package will load with rgdal.
-library(rgdal)
-# for metadata/attributes- vectors or rasters
-library(raster)
-crs(sf_sl_0)
-
-
 ```
 
 
 
-```{r}
+```{r, echo=TRUE}
 sf_sl_0
 ```
 
 or
 
-```{r}
+```{r, echo=TRUE}
 st_crs(sf_sl_0)
 ```
 
 Visualizing using shapefiles: map of Sri Lanka
 
-```{r}
+```{r, echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf()
 ```
 
 
 
-```{r}
+```{r, echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf(fill='beige') +
 theme_minimal()
@@ -369,7 +363,7 @@ theme_minimal()
 
 
 
-```{r}
+```{r, echo=TRUE}
 library(knitr)
 sf_sl_0 %>% kable()
 ```
@@ -387,7 +381,7 @@ district
 
 2. Guess the output.
 
-```{r,eval=FALSE}
+```{r,eval=FALSE, echo=TRUE}
 ggplot() +
   geom_sf(data=province, lwd=2, col="black") + 
   geom_sf(data=district, linetype=21, col="red")
@@ -399,7 +393,7 @@ ggplot() +
 ## Annotations
 
 
-```{r,eval=FALSE}
+```{r, echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf(fill='beige') +
 ggspatial::annotation_north_arrow(location = "br")+
@@ -408,7 +402,7 @@ ggspatial::annotation_north_arrow(location = "br")+
 
 
 
-```{r,echo=FALSE}
+```{r,echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf(fill='beige') +
 ggspatial::annotation_north_arrow(location = "br")+
@@ -419,7 +413,7 @@ ggspatial::annotation_north_arrow(location = "br")+
 
 1. Convert regular data frame to sf
 
-```{r}
+```{r, echo=TRUE}
 library(sf)
 library(dplyr)
 
@@ -435,7 +429,7 @@ cities_sf <- st_as_sf(cities, coords = c("lon", "lat"), crs = 4326)
 
 ```
 
-```{r}
+```{r, echo=TRUE}
 st_crs(cities_sf)
 #> EPSG:4326 (WGS84)
 
@@ -443,7 +437,9 @@ st_crs(cities_sf)
 
 2. Transforming coordinates
 
-```{r}
+
+
+```{r, echo=TRUE}
 # Transform to UTM (meters)
 cities_utm <- st_transform(cities_sf, crs = 32618)  # UTM zone 18N
 
@@ -451,7 +447,7 @@ st_crs(cities_utm)
 #> EPSG:32618 → coordinates in meters
 ```
 
-```{r}
+```{r, echo=TRUE}
 # Original coordinates (degrees)
 cities_sf
 
@@ -468,13 +464,16 @@ cities_utm
 
 ## Simple feature map
 
-```{r}
+
+
+```{r, echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf() +
   coord_sf()
 ```
 
-```{r}
+
+```{r, echo=TRUE}
 ggplot(sf_sl_0) +
   geom_sf() +
   coord_sf(crs = st_crs(3577))
@@ -484,7 +483,7 @@ ggplot(sf_sl_0) +
 
 Example 1
 
-```{r}
+```{r, echo=TRUE}
 library(ggplot2)
 library(sf)
 
@@ -519,7 +518,7 @@ ggplot(polygon_df, aes(x = X, y = Y)) +
 ```
 
 
-```{r}
+```{r, echo=TRUE}
 library(ceylon)
 data(sf_sl_0)
 sf_sl_0
@@ -532,7 +531,7 @@ polygon_df_sl
 
 Example 2
 
-```{r}
+```{r, echo=TRUE}
 # devtools::install_github("UrbanInstitute/urbnmapr")
 library(tidyverse)
 library(magrittr)
@@ -546,7 +545,7 @@ library(geofacet)
 
 
 
-```{r}
+```{r, echo=TRUE}
 statepop1 <- statepop %>% rename(state_name = full)
 head(statepop1)
 statepop2 <- full_join(statepop1, states, by = "state_name")
@@ -554,14 +553,14 @@ head(statepop2)
 ```
 
 
-```{r}
+```{r, echo=TRUE}
 ggplot() + 
   geom_point(data = statepop2, mapping = aes(x = long, y = lat, group = group), fill = "grey", color = "black") 
 
 ```
 
 
-```{r}
+```{r, echo=TRUE}
 ggplot() + 
   geom_polygon(data = statepop2, mapping = aes(x = long, y = lat, group = group),fill = "grey", color = "black") 
 ```
@@ -569,7 +568,7 @@ ggplot() +
 
 Example 3
 
-```{r}
+```{r, echo=TRUE}
 mi_counties <- map_data("county", "michigan") %>% 
   select(lon = long, lat, group, id = subregion)
 head(mi_counties)
@@ -583,7 +582,8 @@ rnaturalearth is an R package that provides ready-to-use maps of the world, coun
 
 Example 1
 
-```{r}
+
+```{r, echo=TRUE}
 library(ggplot2)
 library(dplyr)
 library(rnaturalearth)
@@ -598,7 +598,8 @@ head(sri_lanka)
 
 Example 2
 
-```{r}
+
+```{r, echo=TRUE}
 library(rnaturalearth)
 library(sf)
 library(ggplot2)
@@ -618,7 +619,7 @@ ggplot(world) +
 
 1. Mark following locations on the map
 
-```{r}
+```{r, echo=TRUE}
 oz_capitals <- tibble::tribble( 
   ~city,           ~lat,     ~lon,
   "Sydney",    -33.8688, 151.2093,  
@@ -634,7 +635,7 @@ oz_capitals <- tibble::tribble(
 
 Help:
 
-```{r}
+```{r, echo=TRUE}
 library(ozmaps)
 library(sf)
 oz_states <- ozmaps::ozmap_states
@@ -643,7 +644,7 @@ oz_states
 
 2. Projecting your data
 
-```{r}
+```{r, eval=FALSE, echo=TRUE}
 library(sf)
 library(ggplot2)
 # devtools::install_github("hrbrmstr/albersusa")
