@@ -295,3 +295,23 @@ A shapefile actually consists of several files that work together. The main ones
 | .dbf           | Attribute data (like a spreadsheet) |
 | .prj           | Projection information (coordinate reference system) |
 | .cpg           | Encoding of text attributes (optional) |
+
+## R Example
+
+```{r}
+library(sf)
+library(rnaturalearth)
+
+# Read shapefile
+world <- ne_countries(scale = "medium", returnclass = "sf")
+head(world)
+
+# Check CRS
+st_crs(world)
+#> CRS: EPSG:4326 (WGS84) → unprojected lat/lon in degrees
+
+# Project to UTM
+world_utm <- st_transform(world, crs = 32633)
+#> CRS: EPSG:32633 → projected in meters
+
+```
