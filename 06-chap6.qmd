@@ -296,7 +296,8 @@ A shapefile actually consists of several files that work together. The main ones
 | .prj           | Projection information (coordinate reference system) |
 | .cpg           | Encoding of text attributes (optional) |
 
-## R Example
+
+## R Example 1
 
 ```{r}
 library(sf)
@@ -315,3 +316,341 @@ world_utm <- st_transform(world, crs = 32633)
 #> CRS: EPSG:32633 → projected in meters
 
 ```
+
+## R Example 2
+
+```{r, message=FALSE, warning=FALSE}
+# install.packages("devtools")
+devtools::install_github("thiyangt/ceylon")
+library(ceylon)
+library(tidyverse)
+library(sp)
+library(viridis)
+```
+
+```{r}
+data(sf_sl_0)
+class(sf_sl_0)
+# work with spatial data; sp package will load with rgdal.
+library(rgdal)
+# for metadata/attributes- vectors or rasters
+library(raster)
+crs(sf_sl_0)
+
+
+```
+
+
+
+```{r}
+sf_sl_0
+```
+
+or
+
+```{r}
+st_crs(sf_sl_0)
+```
+
+Visualizing using shapefiles: map of Sri Lanka
+
+```{r}
+ggplot(sf_sl_0) +
+  geom_sf()
+```
+
+
+
+```{r}
+ggplot(sf_sl_0) +
+  geom_sf(fill='beige') +
+theme_minimal()
+```
+
+
+
+```{r}
+library(knitr)
+sf_sl_0 %>% kable()
+```
+
+## Exercise
+
+1. Draw district and province maps
+
+data:
+
+```r
+province
+district
+```
+
+2. Guess the output.
+
+```{r,eval=FALSE}
+ggplot() +
+  geom_sf(data=province, lwd=2, col="black") + 
+  geom_sf(data=district, linetype=21, col="red")
+```
+
+
+3. Colour provinces according to the population.
+
+## Annotations
+
+
+```{r,eval=FALSE}
+ggplot(sf_sl_0) +
+  geom_sf(fill='beige') +
+ggspatial::annotation_north_arrow(location = "br")+
+  ggspatial::annotation_scale(location = "bl")
+```
+
+
+
+```{r,echo=FALSE}
+ggplot(sf_sl_0) +
+  geom_sf(fill='beige') +
+ggspatial::annotation_north_arrow(location = "br")+
+  ggspatial::annotation_scale(location = "bl")
+```
+
+## Spatial Data Wrangling
+
+1. Convert regular data frame to sf
+
+```{r}
+library(sf)
+library(dplyr)
+
+# Example data frame: cities with lat/lon
+cities <- data.frame(
+  name = c("New York", "London", "Tokyo"),
+  lon = c(-74.0060, -0.1276, 139.6917),
+  lat = c(40.7128, 51.5074, 35.6895)
+)
+
+# Convert to sf object
+cities_sf <- st_as_sf(cities, coords = c("lon", "lat"), crs = 4326)
+
+```
+
+```{r}
+st_crs(cities_sf)
+#> EPSG:4326 (WGS84)
+
+```
+
+2. Transforming coordinates
+
+```{r}
+# Transform to UTM (meters)
+cities_utm <- st_transform(cities_sf, crs = 32618)  # UTM zone 18N
+
+st_crs(cities_utm)
+#> EPSG:32618 → coordinates in meters
+```
+
+```{r}
+# Original coordinates (degrees)
+cities_sf
+
+# Transformed coordinates (meters)
+cities_utm
+```
+
+
+## Two types of maps 
+
+1. Simple feature map
+
+2. Polygon maps
+
+## Simple feature map
+
+```{r}
+ggplot(sf_sl_0) +
+  geom_sf() +
+  coord_sf()
+```
+
+```{r}
+ggplot(sf_sl_0) +
+  geom_sf() +
+  coord_sf(crs = st_crs(3577))
+```
+
+## Polygon map
+
+Example 1
+
+```{r}
+library(ggplot2)
+library(sf)
+
+# Create a simple polygon (square) as sf object
+coords <- matrix(c(
+  0, 0,
+  0, 1,
+  1, 1,
+  1, 0,
+  0, 0  # close the polygon
+), ncol = 2, byrow = TRUE)
+
+polygon_sf <- st_sf(
+  geometry = st_sfc(st_polygon(list(coords)))
+)
+polygon_sf
+
+# Extract coordinates for geom_point
+polygon_points <- st_coordinates(polygon_sf)
+polygon_points
+
+# Convert to data frame
+polygon_df <- as.data.frame(polygon_points)
+head(polygon_df)
+
+# Plot using geom_point
+ggplot(polygon_df, aes(x = X, y = Y)) +
+  geom_point(color = "blue", size = 3) +
+  coord_fixed() +
+  labs(title = "Polygon represented by points")
+
+```
+
+
+```{r}
+library(ceylon)
+data(sf_sl_0)
+sf_sl_0
+# Convert to data frame
+polygon_df_sl <- as.data.frame(sf_sl_0)
+polygon_df_sl
+
+
+```
+
+Example 2
+
+```{r}
+# devtools::install_github("UrbanInstitute/urbnmapr")
+library(tidyverse)
+library(magrittr)
+library(urbnmapr)
+library(usmap) # to obtain population data
+library(ggthemes)
+library(scales)
+library(geofacet)
+
+```
+
+
+
+```{r}
+statepop1 <- statepop %>% rename(state_name = full)
+head(statepop1)
+statepop2 <- full_join(statepop1, states, by = "state_name")
+head(statepop2)
+```
+
+
+```{r}
+ggplot() + 
+  geom_point(data = statepop2, mapping = aes(x = long, y = lat, group = group), fill = "grey", color = "black") 
+
+```
+
+
+```{r}
+ggplot() + 
+  geom_polygon(data = statepop2, mapping = aes(x = long, y = lat, group = group),fill = "grey", color = "black") 
+```
+
+
+Example 3
+
+```{r}
+mi_counties <- map_data("county", "michigan") %>% 
+  select(lon = long, lat, group, id = subregion)
+head(mi_counties)
+```
+
+Plot: in class
+
+## rnaturalearth 
+
+rnaturalearth is an R package that provides ready-to-use maps of the world, countries, and regions as sf (spatial) or data frames. It’s a super convenient way to get geographic data without downloading shapefiles manually.
+
+Example 1
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+# Get Sri Lanka admin-1 regions (provinces)
+sri_lanka <- ne_states(country = "Sri Lanka", returnclass = "sf")
+
+# Check the first few rows
+head(sri_lanka)
+
+```
+
+Example 2
+
+```{r}
+library(rnaturalearth)
+library(sf)
+library(ggplot2)
+
+# Get world countries as sf object
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Plot the map
+ggplot(world) +
+  geom_sf(fill = "lightblue", color = "black") +
+  labs(title = "World Map")
+
+```
+
+
+## Practical
+
+1. Mark following locations on the map
+
+```{r}
+oz_capitals <- tibble::tribble( 
+  ~city,           ~lat,     ~lon,
+  "Sydney",    -33.8688, 151.2093,  
+  "Melbourne", -37.8136, 144.9631, 
+  "Brisbane",  -27.4698, 153.0251, 
+  "Adelaide",  -34.9285, 138.6007, 
+  "Perth",     -31.9505, 115.8605, 
+  "Hobart",    -42.8821, 147.3272, 
+  "Canberra",  -35.2809, 149.1300, 
+  "Darwin",    -12.4634, 130.8456, 
+)
+```
+
+Help:
+
+```{r}
+library(ozmaps)
+library(sf)
+oz_states <- ozmaps::ozmap_states
+oz_states
+```
+
+2. Projecting your data
+
+```{r}
+library(sf)
+library(ggplot2)
+# devtools::install_github("hrbrmstr/albersusa")
+library(albersusa)
+crs_use = "+proj=laea +lat_0=30 +lon_0=-95"
+
+d_points = data.frame(long = c(-110, -103, -84), 
+                      lat  = c(45, 40, 41))
+```
+
