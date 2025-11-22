@@ -313,7 +313,7 @@
 
 \markboth{Copyright notice}{Copyright notice}
 
-Produced on 4 October 2025.
+Produced on 22 November 2025.
 
 © Thiyanga S. Talagala (2025).
 
@@ -3028,6 +3028,235 @@ from the data}
 
 Box, G. E., Jenkins, G. M., Reinsel, G. C., \& Ljung, G. M. (2015). Time
 series analysis: forecasting and control.
+
+\bookmarksetup{startatroot}
+
+\chapter{Fit ARIMA class models using R/
+Python}\label{fit-arima-class-models-using-r-python}
+
+\bookmarksetup{startatroot}
+
+\chapter{Spatial Data Visualisation}\label{spatial-data-visualisation}
+
+\section{R packages for spatial data
+analysis}\label{r-packages-for-spatial-data-analysis}
+
+\begin{itemize}
+\item
+  rgdal
+\item
+  sp
+\item
+  rgeos
+\item
+  raster
+\item
+  sf
+\item
+  tmap
+\item
+  leaflet
+\item
+  ggmap
+\item
+  maptools
+\item
+  gstat
+\item
+  spatstat
+\item
+  stars
+\item
+  geosphere
+\item
+  RgoogleMaps
+\item
+  rasterVis
+\end{itemize}
+
+\section{Geospatial vector data
+structures}\label{geospatial-vector-data-structures}
+
+\begin{itemize}
+\item
+  Point: Individual longitude and latitude of locations
+
+  Eg: Locations, Buildings
+\item
+  Lines: Two or more vertices or points that are connected
+
+  Eg: Roads, rivers
+\item
+  Polygons: Three or more vertices and closed
+
+  Eg: Area of a country, state, district
+\end{itemize}
+
+\section{Challenge in Spatial Data
+Viualisation}\label{challenge-in-spatial-data-viualisation}
+
+Move from
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/mediabag/globe-world.gif}}
+
+to
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+How to transform this three dimensional angular system to a two
+dimensional cartesian system?
+
+Solution: Spatial Projections
+
+\section{Map Projection}\label{map-projection}
+
+\begin{itemize}
+\item
+  A projection is about the geometric transformation from 3D to 2D.
+\item
+  A map projection is a method or mathematical formula to represent the
+  curved surface of the Earth on a flat map.
+\item
+  It focuses on how the Earth's surface is ``flattened'', which always
+  introduces some distortion in area, shape, distance, or direction.
+\end{itemize}
+
+Examples:
+
+Mercator (preserves direction)
+
+Albers Equal-Area Conic (preserves area)
+
+Goode Homolosine (minimizes distortion globally)
+
+\section{Types of Map Projections}\label{types-of-map-projections}
+
+\subsection{Cylindrical Projections}\label{cylindrical-projections}
+
+Imagine wrapping a cylinder around the Earth and projecting the surface
+onto it.
+
+Characteristics:
+
+Meridians and parallels are straight and perpendicular.
+
+Distortion increases away from the equator.
+
+Example:
+
+Mercator Projection -- preserves direction, but greatly distorts area
+near the poles.
+
+\subsection{Conical Projections}\label{conical-projections}
+
+Imagine wrapping a cone over the Earth, usually touching at one or two
+standard parallels.
+
+Characteristics:
+
+Parallels appear as arcs; meridians converge toward a point.
+
+Best for mid-latitude regions with an east--west extent.
+
+Example:
+
+Albers Equal-Area Conic -- preserves area, commonly used for countries
+or regions.
+
+\subsection{Planar (Azimuthal)
+Projections}\label{planar-azimuthal-projections}
+
+The Earth's surface is projected onto a flat plane, usually touching at
+a single point.
+
+Characteristics:
+
+Distortion increases outward from the point of tangency.
+
+Can preserve distance, area, or shape depending on the type.
+
+Example:
+
+Goode Homolosine -- minimizes global distortion by combining multiple
+projection methods.
+
+Visit
+\href{https://johnedevans.files.wordpress.com/2019/01/map-projections-explained.jpg}{here}
+to see the visual illustration.
+
+\section{Example maps}\label{example-maps}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-2.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-3.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-4.pdf}}
+
+\section{Why Multiple Map Projection Types
+Exist}\label{why-multiple-map-projection-types-exist}
+
+The Earth is round, but maps are flat. Because no flat map can perfectly
+preserve all properties of the globe, every projection introduces some
+distortion. Different projections are therefore designed to preserve
+certain properties depending on the map's purpose.
+
+\subsection{Key Reasons for Multiple Projection
+Types}\label{key-reasons-for-multiple-projection-types}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Different Types of Distortion
+\end{enumerate}
+
+Shape (conformal) -- keeps angles and shapes correct (e.g., Mercator).
+
+Area (equal-area / equivalent) -- keeps relative sizes correct (e.g.,
+Albers Equal-Area Conic).
+
+Distance (equidistant) -- preserves distances from a point or along
+certain lines (e.g., Azimuthal Equidistant).
+
+Direction (azimuthal / navigational) -- preserves angles and compass
+bearings (e.g., Mercator for navigation).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Geographical Focus
+\end{enumerate}
+
+Some projections are better for global maps, others for regional or
+local maps.
+
+Example: Conical projections work well for mid-latitude countries, while
+planar projections work for polar regions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Practical Applications
+\end{enumerate}
+
+Navigation -- need accurate direction → Mercator.
+
+Thematic / statistical maps -- need accurate area → Albers Equal-Area.
+
+Minimizing overall distortion -- Goode Homolosine for global thematic
+maps.
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-5-1.pdf}}
+
+\section{Quick Comparison Table}\label{quick-comparison-table}
+
+In-class
 
 \bookmarksetup{startatroot}
 

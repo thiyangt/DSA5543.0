@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.4)  4 OCT 2025 09:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.18)  22 NOV 2025 07:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo
@@ -24,7 +24,7 @@ File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -84,8 +84,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks21
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -100,7 +100,7 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks22
@@ -230,7 +230,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \FrameRule=\dimen169
 \FrameSep=\dimen170
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip56
 \LTright=\skip57
 \LTpre=\skip58
@@ -267,7 +267,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count313
 \@thisrulewidth=\dimen184
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen185
 \ar@mcellbox=\box62
 \extrarowheight=\dimen186
@@ -664,17 +664,17 @@ File: biblatex.cfg
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Document encoding is UTF8 ....
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-09-02 L3 programming layer (loader) 
+Package: expl3 2025-11-06 L3 programming layer (loader) 
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count461
 ))
 Package biblatex Info: ... and expl3
-(biblatex)             2025-09-02 L3 programming layer (loader) 
+(biblatex)             2025-11-06 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2024-08-16 L3 Experimental document command parser
+Package: xparse 2025-10-09 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
 ))
@@ -682,7 +682,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 175.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bera/bera.sty
 Package: bera 2004/01/31 (WaS)
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 116.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -848,10 +848,11 @@ LaTeX Font Info:    Redeclaring math alphabet \mathrm on input line 145.
 LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
 (Font)                  OMS/mdbch/m/n --> OMS/mdbch/m/n on input line 167.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks33
 \XKV@tempa@toks=\toks34
+\XKV@tempb@toks=\toks35
 )
 \XKV@depth=\count462
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -880,7 +881,7 @@ LaTeX Font Info:    Redeclaring math accent \widetilde on input line 532.
 LaTeX Font Info:    Redeclaring math accent \widehat on input line 533.
 \rulethickness=\skip88
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 )) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fira/FiraSans.sty
 Package: FiraSans 2022/09/17 (Bob Tennent and autoinst) Style file for Fira Sans fonts.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
@@ -919,9 +920,9 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthL=\skip100
 \f@nch@widthC=\skip101
 \f@nch@widthR=\skip102
-\@temptokenb=\toks35
+\@temptokenb=\toks36
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2023/12/19 v1.2f Bold Symbol Support (DPC/FMi)
+Package: bm 2025/10/21 v1.2g Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup11
 \symboldletters=\mathgroup12
 \symboldsymbols=\mathgroup13
@@ -936,7 +937,7 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \aftertitleunit=\skip104
 \ttl@plus=\dimen260
 \ttl@minus=\dimen261
-\ttl@toksa=\toks36
+\ttl@toksa=\toks37
 \titlewidth=\dimen262
 \titlewidthlast=\dimen263
 \titlewidthfirst=\dimen264
@@ -965,8 +966,8 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \abovetabulinesep=\dimen273
 \belowtabulinesep=\dimen274
 \tabustrutrule=\dimen275
-\tabu@thebody=\toks37
-\tabu@footnotes=\toks38
+\tabu@thebody=\toks38
+\tabu@footnotes=\toks39
 \tabu@box=\box70
 \tabu@arstrutbox=\box71
 \tabu@hleads=\box72
@@ -1149,10 +1150,10 @@ or  <return>  to continue without it.
 
  
 Here is how much of TeX's memory you used:
- 27699 strings out of 469729
- 480075 string characters out of 5475761
- 1348412 words of memory out of 5000000
- 55772 multiletter control sequences out of 15000+600000
+ 27710 strings out of 469519
+ 480282 string characters out of 5468347
+ 1352005 words of memory out of 5000000
+ 55992 multiletter control sequences out of 15000+600000
  707216 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,4n,93p,1002b,852s stack positions out of 10000i,1000n,20000p,200000b,200000s

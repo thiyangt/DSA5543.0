@@ -1,0 +1,277 @@
+# Spatial Data Visualisation
+
+## R packages for spatial data analysis
+
+- rgdal
+
+- sp
+
+- rgeos
+
+- raster
+
+- sf
+
+- tmap
+
+- leaflet
+
+- ggmap
+
+- maptools
+
+- gstat
+
+- spatstat
+
+- stars
+
+- geosphere
+
+- RgoogleMaps
+
+- rasterVis
+
+## Geospatial vector data structures
+
+- Point: Individual longitude and latitude of locations
+
+    Eg: Locations, Buildings
+
+- Lines: Two or more vertices or points that are connected
+
+    Eg: Roads, rivers
+
+- Polygons: Three or more vertices and closed
+
+    Eg: Area of a country, state, district
+    
+## Challenge in Spatial Data Viualisation
+
+Move from 
+
+![](https://media.tenor.com/4A4UHbVtBIIAAAAC/globe-world.gif)
+
+to
+
+```{r, echo=FALSE}
+library(ggplot2)
+map <- map_data("world")
+ggplot(data = map, aes(long, lat, group = group)) + geom_polygon(color = "white") +
+  labs(x = "Longitude",
+       y = "Latitude") +
+  theme(legend.position = "none")
+```
+
+How to transform this three dimensional angular system to a two dimensional cartesian system?
+
+Solution: Spatial Projections
+
+## Map Projection
+
+- A projection is about the geometric transformation from 3D to 2D.
+
+- A map projection is a method or mathematical formula to represent the curved surface of the Earth on a flat map.
+
+- It focuses on how the Earth’s surface is “flattened”, which always introduces some distortion in area, shape, distance, or direction.
+
+Examples:
+
+Mercator (preserves direction)
+
+Albers Equal-Area Conic (preserves area)
+
+Goode Homolosine (minimizes distortion globally)
+
+
+## Types of Map Projections
+
+### Cylindrical Projections
+
+Imagine wrapping a cylinder around the Earth and projecting the surface onto it.
+
+Characteristics:
+
+Meridians and parallels are straight and perpendicular.
+
+Distortion increases away from the equator.
+
+Example:
+
+Mercator Projection – preserves direction, but greatly distorts area near the poles.
+
+### Conical Projections
+
+Imagine wrapping a cone over the Earth, usually touching at one or two standard parallels.
+
+Characteristics:
+
+Parallels appear as arcs; meridians converge toward a point.
+
+Best for mid-latitude regions with an east–west extent.
+
+Example:
+
+Albers Equal-Area Conic – preserves area, commonly used for countries or regions.
+
+### Planar (Azimuthal) Projections
+
+The Earth’s surface is projected onto a flat plane, usually touching at a single point.
+
+Characteristics:
+
+Distortion increases outward from the point of tangency.
+
+Can preserve distance, area, or shape depending on the type.
+
+Example:
+
+Goode Homolosine – minimizes global distortion by combining multiple projection methods.
+
+Visit [here](https://johnedevans.files.wordpress.com/2019/01/map-projections-explained.jpg) to see the visual illustration.
+
+
+
+## Example maps
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+#https://r-spatial.org/r/2018/10/25/ggplot2-sf.html
+world <- ne_countries(scale = "medium", returnclass = "sf")
+p1 <- ggplot(data = world)+
+  geom_sf()+
+  labs(title = 'ESRI:54030: Robinson projection')+             theme(plot.title = element_text(face = "bold"))+
+  coord_sf(crs = st_crs("ESRI:54030"))
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=20, fig.height=15}
+p2 <- ggplot(data = world)+
+  geom_sf()+
+  labs(title = 'ESRI:54009: Mollweide projection')+             theme(plot.title = element_text(face = "bold"))+
+  coord_sf(crs = st_crs("ESRI:54009"))
+
+p3 <- ggplot(data = world)+
+  geom_sf()+
+  labs(title = 'ESRI:54002: Equidistant cylindrical projection')+             theme(plot.title = element_text(face = "bold"))+
+  coord_sf(crs = st_crs("ESRI:54002"))
+
+p4 <- ggplot(data = world)+
+  geom_sf()+
+  labs(title = 'ESRI:54008: Sinusoidal projection')+             theme(plot.title = element_text(face = "bold"))+
+  coord_sf(crs = st_crs("ESRI:54008"))
+
+ 
+```
+
+```{r}
+p1
+p2
+p3
+p4
+```
+## Why Multiple Map Projection Types Exist
+
+The Earth is round, but maps are flat. Because no flat map can perfectly preserve all properties of the globe, every projection introduces some distortion. Different projections are therefore designed to preserve certain properties depending on the map’s purpose.
+
+### Key Reasons for Multiple Projection Types
+
+1. Different Types of Distortion
+
+Shape (conformal) – keeps angles and shapes correct (e.g., Mercator).
+
+Area (equal-area / equivalent) – keeps relative sizes correct (e.g., Albers Equal-Area Conic).
+
+Distance (equidistant) – preserves distances from a point or along certain lines (e.g., Azimuthal Equidistant).
+
+Direction (azimuthal / navigational) – preserves angles and compass bearings (e.g., Mercator for navigation).
+
+2. Geographical Focus
+
+Some projections are better for global maps, others for regional or local maps.
+
+Example: Conical projections work well for mid-latitude countries, while planar projections work for polar regions.
+
+3. Practical Applications
+
+Navigation – need accurate direction → Mercator.
+
+Thematic / statistical maps – need accurate area → Albers Equal-Area.
+
+Minimizing overall distortion – Goode Homolosine for global thematic maps.
+
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+# Load world map
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# 1. Cylindrical (Mercator)
+p1 <- ggplot(data = world) +
+  geom_sf() +
+  labs(title = "Mercator Projection (EPSG:3395)") +
+  theme(plot.title = element_text(face = "bold")) +
+  coord_sf(crs = st_crs(3395))  # Mercator
+
+# 2. Conical (Albers Equal-Area Conic)
+p2 <- ggplot(data = world) +
+  geom_sf() +
+  labs(title = "Albers Equal-Area Conic (ESRI:102003)") +
+  theme(plot.title = element_text(face = "bold")) +
+  coord_sf(crs = st_crs("ESRI:102003"))  # Albers Equal-Area Conic
+
+# 3. Planar (Goode Homolosine / Sinusoidal)
+p3 <- ggplot(data = world) +
+  geom_sf() +
+  labs(title = "Goode Homolosine / Sinusoidal (ESRI:54008)") +
+  theme(plot.title = element_text(face = "bold")) +
+  coord_sf(crs = st_crs("ESRI:54008"))  # Sinusoidal
+
+# Plot maps
+library(gridExtra)
+grid.arrange(p1, p2, p3, nrow = 3)
+
+```
+
+## Quick Comparison Table
+
+In-class
+
+## Coordinate Reference System (CRS)
+
+A CRS is a complete spatial reference framework that defines:
+
+- How coordinates relate to the Earth (datum) 
+
+    A datum defines the mathematical Earth model and reference point for coordinates, ensuring that latitude, longitude, and height correspond to real positions on the Earth.)
+
+- The map projection used (if any)
+
+## What is a Datum?
+
+A datum is a mathematical model of the Earth that defines:
+
+The size and shape of the Earth (ellipsoid or spheroid)
+
+The origin and orientation of the coordinate system (where latitude 0°, longitude 0° are defined)
+
+In short, a datum tells us where "zero" is and how the coordinates are measured on the Earth’s surface.
+
+## Why is a Datum Important?
+
+Different datums model the Earth slightly differently, so the same latitude/longitude may correspond to different locations depending on the datum.
+
+Example:
+
+WGS84 → used by GPS
+
+NAD83 → used in North America
+
+A coordinate of 40°N, 75°W will be slightly different on WGS84 vs NAD83 because the reference ellipsoid is slightly shifted.
