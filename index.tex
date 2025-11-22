@@ -3252,11 +3252,92 @@ Thematic / statistical maps -- need accurate area → Albers Equal-Area.
 Minimizing overall distortion -- Goode Homolosine for global thematic
 maps.
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-5-1.pdf}}
-
 \section{Quick Comparison Table}\label{quick-comparison-table}
 
 In-class
+
+\section{Coordinate Reference System
+(CRS)}\label{coordinate-reference-system-crs}
+
+A CRS is a complete spatial reference framework that defines:
+
+\begin{itemize}
+\item
+  How coordinates relate to the Earth (datum)
+
+  A datum defines the mathematical Earth model and reference point for
+  coordinates, ensuring that latitude, longitude, and height correspond
+  to real positions on the Earth.)
+\item
+  The map projection used (if any)
+\end{itemize}
+
+\section{What is a Datum?}\label{what-is-a-datum}
+
+A datum is a mathematical model of the Earth that defines:
+
+The size and shape of the Earth (ellipsoid or spheroid)
+
+The origin and orientation of the coordinate system (where latitude 0°,
+longitude 0° are defined)
+
+In short, a datum tells us where ``zero'' is and how the coordinates are
+measured on the Earth's surface.
+
+\section{Why is a Datum Important?}\label{why-is-a-datum-important}
+
+Different datums model the Earth slightly differently, so the same
+latitude/longitude may correspond to different locations depending on
+the datum.
+
+Example:
+
+WGS84 → used by GPS
+
+NAD83 → used in North America
+
+A coordinate of 40°N, 75°W will be slightly different on WGS84 vs NAD83
+because the reference ellipsoid is slightly shifted.
+
+\section{Projection vs CRS}\label{projection-vs-crs}
+
+\begin{itemize}
+\item
+  Projection = method to flatten the Earth
+\item
+  CRS = full system that defines the Earth model + projection +
+  coordinate rules
+\end{itemize}
+
+\section{Shapefile}\label{shapefile}
+
+A shapefile is a popular geospatial vector data format used to store
+geographic features like points, lines, and polygons, along with their
+attributes. It's commonly used in GIS (Geographic Information Systems)
+and mapping software, including R (sf or rgdal packages).
+
+A shapefile actually consists of several files that work together. The
+main ones are:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3600}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+File Extension
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Purpose
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+.shp & Geometry of features (points, lines, polygons) \\
+.shx & Shape index (helps software find features quickly) \\
+.dbf & Attribute data (like a spreadsheet) \\
+.prj & Projection information (coordinate reference system) \\
+.cpg & Encoding of text attributes (optional) \\
+\end{longtable}
 
 \bookmarksetup{startatroot}
 

@@ -204,7 +204,7 @@ Thematic / statistical maps – need accurate area → Albers Equal-Area.
 Minimizing overall distortion – Goode Homolosine for global thematic maps.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 library(ggplot2)
 library(sf)
 library(rnaturalearth)
@@ -275,3 +275,23 @@ WGS84 → used by GPS
 NAD83 → used in North America
 
 A coordinate of 40°N, 75°W will be slightly different on WGS84 vs NAD83 because the reference ellipsoid is slightly shifted.
+
+## Projection vs CRS
+
+- Projection = method to flatten the Earth
+
+- CRS = full system that defines the Earth model + projection + coordinate rules
+
+## Shapefile
+
+A shapefile is a popular geospatial vector data format used to store geographic features like points, lines, and polygons, along with their attributes. It’s commonly used in GIS (Geographic Information Systems) and mapping software, including R (sf or rgdal packages).
+
+A shapefile actually consists of several files that work together. The main ones are:
+
+| File Extension | Purpose |
+|----------------|---------|
+| .shp           | Geometry of features (points, lines, polygons) |
+| .shx           | Shape index (helps software find features quickly) |
+| .dbf           | Attribute data (like a spreadsheet) |
+| .prj           | Projection information (coordinate reference system) |
+| .cpg           | Encoding of text attributes (optional) |

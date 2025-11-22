@@ -118,5 +118,25 @@
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Spatial Data Visualisation</span>"
     ]
+  },
+  {
+    "objectID": "06-chap6.html#projection-vs-crs",
+    "href": "06-chap6.html#projection-vs-crs",
+    "title": "\n6  Spatial Data Visualisation\n",
+    "section": "\n6.12 Projection vs CRS",
+    "text": "6.12 Projection vs CRS\n\nProjection = method to flatten the Earth\nCRS = full system that defines the Earth model + projection + coordinate rules",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Spatial Data Visualisation</span>"
+    ]
+  },
+  {
+    "objectID": "06-chap6.html#shapefile",
+    "href": "06-chap6.html#shapefile",
+    "title": "\n6  Spatial Data Visualisation\n",
+    "section": "\n6.13 Shapefile",
+    "text": "6.13 Shapefile\nA shapefile is a popular geospatial vector data format used to store geographic features like points, lines, and polygons, along with their attributes. It’s commonly used in GIS (Geographic Information Systems) and mapping software, including R (sf or rgdal packages).\nA shapefile actually consists of several files that work together. The main ones are:\n\n\n\n\n\n\nFile Extension\nPurpose\n\n\n\n.shp\nGeometry of features (points, lines, polygons)\n\n\n.shx\nShape index (helps software find features quickly)\n\n\n.dbf\nAttribute data (like a spreadsheet)\n\n\n.prj\nProjection information (coordinate reference system)\n\n\n.cpg\nEncoding of text attributes (optional)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Spatial Data Visualisation</span>"
+    ]
   }
 ]
