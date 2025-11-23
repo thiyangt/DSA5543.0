@@ -297,7 +297,7 @@ A shapefile actually consists of several files that work together. The main ones
 | .cpg           | Encoding of text attributes (optional) |
 
 
-## R Example 1
+### R Example 1
 
 ```{r, echo=FALSE}
 library(sf)
@@ -319,7 +319,7 @@ world_utm <- st_transform(world, crs = 32633)
 
 ```
 
-## R Example 2
+### R Example 2
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 # install.packages("devtools")
@@ -518,16 +518,7 @@ ggplot(polygon_df, aes(x = X, y = Y)) +
 ```
 
 
-```{r, echo=TRUE}
-library(ceylon)
-data(sf_sl_0)
-sf_sl_0
-# Convert to data frame
-polygon_df_sl <- as.data.frame(sf_sl_0)
-polygon_df_sl
 
-
-```
 
 Example 2
 
@@ -577,6 +568,19 @@ head(mi_counties)
 ```
 
 Plot: in class
+
+Example 4:  Does as.data.frame(sf_object) work?
+
+```{r, echo=TRUE}
+library(ceylon)
+data(sf_sl_0)
+sf_sl_0
+# Convert to data frame
+polygon_df_sl <- as.data.frame(sf_sl_0)
+polygon_df_sl
+
+
+```
 
 ## rnaturalearth 
 

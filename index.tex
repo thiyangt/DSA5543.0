@@ -3363,7 +3363,7 @@ Purpose
 .cpg & Encoding of text attributes (optional) \\
 \end{longtable}
 
-\section{R Example 1}\label{r-example-1}
+\subsection{R Example 1}\label{r-example-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3607,7 +3607,7 @@ GEOGCRS["WGS 84",
 \end{Highlighting}
 \end{Shaded}
 
-\section{R Example 2}\label{r-example-2}
+\subsection{R Example 2}\label{r-example-2}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4091,39 +4091,6 @@ CRS:           NA
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-24-1.pdf}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ceylon)}
-\FunctionTok{data}\NormalTok{(sf\_sl\_0)}
-\NormalTok{sf\_sl\_0}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Simple feature collection with 1 feature and 1 field
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: 362203.3 ymin: 380301.9 xmax: 621918.1 ymax: 813560.9
-Projected CRS: SLD99 / Sri Lanka Grid 1999
-# A tibble: 1 x 2
-                                                                geometry COUNTRY
-                                                      <MULTIPOLYGON [m]> <chr>  
-1 (((481925.5 381353.7, 481922.9 381350.3, 481919 381348.2, 481914.6 38~ SRI LA~
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Convert to data frame}
-\NormalTok{polygon\_df\_sl }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sf\_sl\_0)}
-\NormalTok{polygon\_df\_sl}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-                        geometry   COUNTRY
-1 MULTIPOLYGON (((481925.5 38... SRI LANKA
-\end{verbatim}
-
 Example 2
 
 \begin{Shaded}
@@ -4174,7 +4141,7 @@ Example 2
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-28-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-27-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4183,7 +4150,7 @@ Example 2
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-29-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-28-1.pdf}}
 
 Example 3
 
@@ -4206,6 +4173,41 @@ Example 3
 \end{verbatim}
 
 Plot: in class
+
+Example 4: Does as.data.frame(sf\_object) work?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ceylon)}
+\FunctionTok{data}\NormalTok{(sf\_sl\_0)}
+\NormalTok{sf\_sl\_0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Simple feature collection with 1 feature and 1 field
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 362203.3 ymin: 380301.9 xmax: 621918.1 ymax: 813560.9
+Projected CRS: SLD99 / Sri Lanka Grid 1999
+# A tibble: 1 x 2
+                                                                geometry COUNTRY
+                                                      <MULTIPOLYGON [m]> <chr>  
+1 (((481925.5 381353.7, 481922.9 381350.3, 481919 381348.2, 481914.6 38~ SRI LA~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert to data frame}
+\NormalTok{polygon\_df\_sl }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sf\_sl\_0)}
+\NormalTok{polygon\_df\_sl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                        geometry   COUNTRY
+1 MULTIPOLYGON (((481925.5 38... SRI LANKA
+\end{verbatim}
 
 \section{rnaturalearth}\label{rnaturalearth}
 
