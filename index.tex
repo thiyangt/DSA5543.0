@@ -313,7 +313,7 @@
 
 \markboth{Copyright notice}{Copyright notice}
 
-Produced on 22 November 2025.
+Produced on 23 November 2025.
 
 © Thiyanga S. Talagala (2025).
 
@@ -3186,11 +3186,35 @@ to see the visual illustration.
 
 \section{Example maps}\label{example-maps}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p2}
+\end{Highlighting}
+\end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-2.pdf}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p3}
+\end{Highlighting}
+\end{Shaded}
+
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p4}
+\end{Highlighting}
+\end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-4-4.pdf}}
 
@@ -3340,6 +3364,14 @@ Purpose
 \end{longtable}
 
 \section{R Example 1}\label{r-example-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read shapefile}
+\NormalTok{world }\OtherTok{\textless{}{-}} \FunctionTok{ne\_countries}\NormalTok{(}\AttributeTok{scale =} \StringTok{"medium"}\NormalTok{, }\AttributeTok{returnclass =} \StringTok{"sf"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(world)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 6 features and 168 fields
@@ -3538,6 +3570,13 @@ Geodetic CRS:  WGS 84
 6      <NA>      <NA>      <NA> MULTIPOLYGON (((12.43916 41...
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Check CRS}
+\FunctionTok{st\_crs}\NormalTok{(world)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 Coordinate Reference System:
   User input: WGS 84 
@@ -3558,11 +3597,36 @@ GEOGCRS["WGS 84",
     ID["EPSG",4326]]
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textgreater{} CRS: EPSG:4326 (WGS84) → unprojected lat/lon in degrees}
+
+\CommentTok{\# Project to UTM}
+\NormalTok{world\_utm }\OtherTok{\textless{}{-}} \FunctionTok{st\_transform}\NormalTok{(world, }\AttributeTok{crs =} \DecValTok{32633}\NormalTok{)}
+\CommentTok{\#\textgreater{} CRS: EPSG:32633 → projected in meters}
+\end{Highlighting}
+\end{Shaded}
+
 \section{R Example 2}\label{r-example-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#devtools::install\_github("thiyangt/ceylon")}
+\FunctionTok{library}\NormalTok{(ceylon)}
+\FunctionTok{data}\NormalTok{(sf\_sl\_0)}
+\FunctionTok{class}\NormalTok{(sf\_sl\_0)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sf\_sl\_0}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 1 feature and 1 field
@@ -3577,6 +3641,12 @@ Projected CRS: SLD99 / Sri Lanka Grid 1999
 \end{verbatim}
 
 or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{st\_crs}\NormalTok{(sf\_sl\_0)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Coordinate Reference System:
@@ -3624,9 +3694,31 @@ PROJCRS["SLD99 / Sri Lanka Grid 1999",
 
 Visualizing using shapefiles: map of Sri Lanka
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-11-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-12-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{fill=}\StringTok{\textquotesingle{}beige\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-13-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+\NormalTok{sf\_sl\_0 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule\noalign{}
@@ -3664,6 +3756,14 @@ data:
   Guess the output.
 \end{enumerate}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{province, }\AttributeTok{lwd=}\DecValTok{2}\NormalTok{, }\AttributeTok{col=}\StringTok{"black"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{district, }\AttributeTok{linetype=}\DecValTok{21}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{2}
@@ -3674,7 +3774,27 @@ data:
 
 \section{Annotations}\label{annotations}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{fill=}\StringTok{\textquotesingle{}beige\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{ggspatial}\SpecialCharTok{::}\FunctionTok{annotation\_north\_arrow}\NormalTok{(}\AttributeTok{location =} \StringTok{"br"}\NormalTok{)}\SpecialCharTok{+}
+\NormalTok{  ggspatial}\SpecialCharTok{::}\FunctionTok{annotation\_scale}\NormalTok{(}\AttributeTok{location =} \StringTok{"bl"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-16-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{fill=}\StringTok{\textquotesingle{}beige\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{ggspatial}\SpecialCharTok{::}\FunctionTok{annotation\_north\_arrow}\NormalTok{(}\AttributeTok{location =} \StringTok{"br"}\NormalTok{)}\SpecialCharTok{+}
+\NormalTok{  ggspatial}\SpecialCharTok{::}\FunctionTok{annotation\_scale}\NormalTok{(}\AttributeTok{location =} \StringTok{"bl"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-17-1.pdf}}
 
 \section{Spatial Data Wrangling}\label{spatial-data-wrangling}
 
@@ -3684,6 +3804,26 @@ data:
 \item
   Convert regular data frame to sf
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example data frame: cities with lat/lon}
+\NormalTok{cities }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"New York"}\NormalTok{, }\StringTok{"London"}\NormalTok{, }\StringTok{"Tokyo"}\NormalTok{),}
+  \AttributeTok{lon =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{74.0060}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.1276}\NormalTok{, }\FloatTok{139.6917}\NormalTok{),}
+  \AttributeTok{lat =} \FunctionTok{c}\NormalTok{(}\FloatTok{40.7128}\NormalTok{, }\FloatTok{51.5074}\NormalTok{, }\FloatTok{35.6895}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Convert to sf object}
+\NormalTok{cities\_sf }\OtherTok{\textless{}{-}} \FunctionTok{st\_as\_sf}\NormalTok{(cities, }\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"lon"}\NormalTok{, }\StringTok{"lat"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{st\_crs}\NormalTok{(cities\_sf)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Coordinate Reference System:
@@ -3718,6 +3858,12 @@ GEOGCRS["WGS 84",
     ID["EPSG",4326]]
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textgreater{} EPSG:4326 (WGS84)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
@@ -3725,6 +3871,15 @@ GEOGCRS["WGS 84",
 \item
   Transforming coordinates
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Transform to UTM (meters)}
+\NormalTok{cities\_utm }\OtherTok{\textless{}{-}} \FunctionTok{st\_transform}\NormalTok{(cities\_sf, }\AttributeTok{crs =} \DecValTok{32618}\NormalTok{)  }\CommentTok{\# UTM zone 18N}
+
+\FunctionTok{st\_crs}\NormalTok{(cities\_utm)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Coordinate Reference System:
@@ -3779,6 +3934,19 @@ PROJCRS["WGS 84 / UTM zone 18N",
     ID["EPSG",32618]]
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textgreater{} EPSG:32618 → coordinates in meters}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Original coordinates (degrees)}
+\NormalTok{cities\_sf}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 Simple feature collection with 3 features and 1 field
 Geometry type: POINT
@@ -3790,6 +3958,13 @@ Geodetic CRS:  WGS 84
 2   London  POINT (-0.1276 51.5074)
 3    Tokyo POINT (139.6917 35.6895)
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Transformed coordinates (meters)}
+\NormalTok{cities\_utm}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 3 features and 1 field
@@ -3815,13 +3990,50 @@ Projected CRS: WGS 84 / UTM zone 18N
 
 \section{Simple feature map}\label{simple-feature-map}
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-21-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_sf}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-22-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sf\_sl\_0) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_sf}\NormalTok{(}\AttributeTok{crs =} \FunctionTok{st\_crs}\NormalTok{(}\DecValTok{3577}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-23-1.pdf}}
 
 \section{Polygon map}\label{polygon-map}
 
 Example 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(sf)}
+
+\CommentTok{\# Create a simple polygon (square) as sf object}
+\NormalTok{coords }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}
+  \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+  \DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{,}
+  \DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{,}
+  \DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+  \DecValTok{0}\NormalTok{, }\DecValTok{0}  \CommentTok{\# close the polygon}
+\NormalTok{), }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{polygon\_sf }\OtherTok{\textless{}{-}} \FunctionTok{st\_sf}\NormalTok{(}
+  \AttributeTok{geometry =} \FunctionTok{st\_sfc}\NormalTok{(}\FunctionTok{st\_polygon}\NormalTok{(}\FunctionTok{list}\NormalTok{(coords)))}
+\NormalTok{)}
+\NormalTok{polygon\_sf}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 1 feature and 0 fields
@@ -3833,6 +4045,14 @@ CRS:           NA
 1 POLYGON ((0 0, 0 1, 1 1, 1 ...
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract coordinates for geom\_point}
+\NormalTok{polygon\_points }\OtherTok{\textless{}{-}} \FunctionTok{st\_coordinates}\NormalTok{(polygon\_sf)}
+\NormalTok{polygon\_points}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
      X Y L1 L2
 [1,] 0 0  1  1
@@ -3841,6 +4061,14 @@ CRS:           NA
 [4,] 1 0  1  1
 [5,] 0 0  1  1
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert to data frame}
+\NormalTok{polygon\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(polygon\_points)}
+\FunctionTok{head}\NormalTok{(polygon\_df)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
   X Y L1 L2
@@ -3851,7 +4079,25 @@ CRS:           NA
 5 0 0  1  1
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-23-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot using geom\_point}
+\FunctionTok{ggplot}\NormalTok{(polygon\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ X, }\AttributeTok{y =}\NormalTok{ Y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_fixed}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polygon represented by points"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-24-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ceylon)}
+\FunctionTok{data}\NormalTok{(sf\_sl\_0)}
+\NormalTok{sf\_sl\_0}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 1 feature and 1 field
@@ -3865,12 +4111,29 @@ Projected CRS: SLD99 / Sri Lanka Grid 1999
 1 (((481925.5 381353.7, 481922.9 381350.3, 481919 381348.2, 481914.6 38~ SRI LA~
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert to data frame}
+\NormalTok{polygon\_df\_sl }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sf\_sl\_0)}
+\NormalTok{polygon\_df\_sl}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
                         geometry   COUNTRY
 1 MULTIPOLYGON (((481925.5 38... SRI LANKA
 \end{verbatim}
 
 Example 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"UrbanInstitute/urbnmapr"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(urbnmapr)}
+\NormalTok{statepop1 }\OtherTok{\textless{}{-}}\NormalTok{ statepop }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename}\NormalTok{(}\AttributeTok{state\_name =}\NormalTok{ full)}
+\FunctionTok{head}\NormalTok{(statepop1)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 # A tibble: 6 x 4
@@ -3883,6 +4146,13 @@ Example 2
 5 06    CA    California 39029342
 6 08    CO    Colorado    5839926
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{statepop2 }\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(statepop1, states, }\AttributeTok{by =} \StringTok{"state\_name"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(statepop2)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 # A tibble: 6 x 12
@@ -3897,11 +4167,33 @@ Example 2
 # i 1 more variable: state_abbv <chr>
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-27-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ statepop2, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group), }\AttributeTok{fill =} \StringTok{"grey"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-28-1.pdf}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{data =}\NormalTok{ statepop2, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}\AttributeTok{fill =} \StringTok{"grey"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-29-1.pdf}}
+
 Example 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mi\_counties }\OtherTok{\textless{}{-}} \FunctionTok{map\_data}\NormalTok{(}\StringTok{"county"}\NormalTok{, }\StringTok{"michigan"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\AttributeTok{lon =}\NormalTok{ long, lat, group, }\AttributeTok{id =}\NormalTok{ subregion)}
+\FunctionTok{head}\NormalTok{(mi\_counties)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
         lon      lat group     id
@@ -3923,6 +4215,20 @@ super convenient way to get geographic data without downloading
 shapefiles manually.
 
 Example 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(rnaturalearth)}
+\FunctionTok{library}\NormalTok{(rnaturalearthdata)}
+\CommentTok{\# Get Sri Lanka admin{-}1 regions (provinces)}
+\NormalTok{sri\_lanka }\OtherTok{\textless{}{-}} \FunctionTok{ne\_states}\NormalTok{(}\AttributeTok{country =} \StringTok{"Sri Lanka"}\NormalTok{, }\AttributeTok{returnclass =} \StringTok{"sf"}\NormalTok{)}
+
+\CommentTok{\# Check the first few rows}
+\FunctionTok{head}\NormalTok{(sri\_lanka)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 6 features and 121 fields
@@ -4081,7 +4387,23 @@ Geodetic CRS:  WGS 84
 
 Example 2
 
-\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-31-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rnaturalearth)}
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Get world countries as sf object}
+\NormalTok{world }\OtherTok{\textless{}{-}} \FunctionTok{ne\_countries}\NormalTok{(}\AttributeTok{scale =} \StringTok{"medium"}\NormalTok{, }\AttributeTok{returnclass =} \StringTok{"sf"}\NormalTok{)}
+
+\CommentTok{\# Plot the map}
+\FunctionTok{ggplot}\NormalTok{(world) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"World Map"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{06-chap6_files/figure-pdf/unnamed-chunk-32-1.pdf}}
 
 \section{Practical}\label{practical}
 
@@ -4092,7 +4414,32 @@ Example 2
   Mark following locations on the map
 \end{enumerate}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{oz\_capitals }\OtherTok{\textless{}{-}}\NormalTok{ tibble}\SpecialCharTok{::}\FunctionTok{tribble}\NormalTok{( }
+  \SpecialCharTok{\textasciitilde{}}\NormalTok{city,           }\SpecialCharTok{\textasciitilde{}}\NormalTok{lat,     }\SpecialCharTok{\textasciitilde{}}\NormalTok{lon,}
+  \StringTok{"Sydney"}\NormalTok{,    }\SpecialCharTok{{-}}\FloatTok{33.8688}\NormalTok{, }\FloatTok{151.2093}\NormalTok{,  }
+  \StringTok{"Melbourne"}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{37.8136}\NormalTok{, }\FloatTok{144.9631}\NormalTok{, }
+  \StringTok{"Brisbane"}\NormalTok{,  }\SpecialCharTok{{-}}\FloatTok{27.4698}\NormalTok{, }\FloatTok{153.0251}\NormalTok{, }
+  \StringTok{"Adelaide"}\NormalTok{,  }\SpecialCharTok{{-}}\FloatTok{34.9285}\NormalTok{, }\FloatTok{138.6007}\NormalTok{, }
+  \StringTok{"Perth"}\NormalTok{,     }\SpecialCharTok{{-}}\FloatTok{31.9505}\NormalTok{, }\FloatTok{115.8605}\NormalTok{, }
+  \StringTok{"Hobart"}\NormalTok{,    }\SpecialCharTok{{-}}\FloatTok{42.8821}\NormalTok{, }\FloatTok{147.3272}\NormalTok{, }
+  \StringTok{"Canberra"}\NormalTok{,  }\SpecialCharTok{{-}}\FloatTok{35.2809}\NormalTok{, }\FloatTok{149.1300}\NormalTok{, }
+  \StringTok{"Darwin"}\NormalTok{,    }\SpecialCharTok{{-}}\FloatTok{12.4634}\NormalTok{, }\FloatTok{130.8456}\NormalTok{, }
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 Help:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ozmaps)}
+\FunctionTok{library}\NormalTok{(sf)}
+\NormalTok{oz\_states }\OtherTok{\textless{}{-}}\NormalTok{ ozmaps}\SpecialCharTok{::}\NormalTok{ozmap\_states}
+\NormalTok{oz\_states}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 Simple feature collection with 9 features and 1 field
@@ -4121,6 +4468,17 @@ Geodetic CRS:  GDA94
 \item
   Projecting your data
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# devtools::install\_github("hrbrmstr/albersusa")}
+\FunctionTok{library}\NormalTok{(albersusa)}
+\NormalTok{crs\_use }\OtherTok{=} \StringTok{"+proj=laea +lat\_0=30 +lon\_0={-}95"}
+
+\NormalTok{d\_points }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{long =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{110}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{103}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{84}\NormalTok{), }
+                      \AttributeTok{lat  =} \FunctionTok{c}\NormalTok{(}\DecValTok{45}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{41}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \bookmarksetup{startatroot}
 

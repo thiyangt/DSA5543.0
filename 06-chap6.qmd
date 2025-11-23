@@ -134,7 +134,7 @@ Visit [here](https://johnedevans.files.wordpress.com/2019/01/map-projections-exp
 
 ## Example maps
 
-```{r, warning=FALSE, message=FALSE, echo=TRUE}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 library(tidyverse)
 library(sf)
 library(rnaturalearth)
@@ -148,7 +148,7 @@ p1 <- ggplot(data = world)+
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=20, fig.height=15, echo=TRUE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=20, fig.height=15}
 p2 <- ggplot(data = world)+
   geom_sf()+
   labs(title = 'ESRI:54009: Mollweide projection')+             theme(plot.title = element_text(face = "bold"))+
@@ -299,10 +299,12 @@ A shapefile actually consists of several files that work together. The main ones
 
 ## R Example 1
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library(sf)
 library(rnaturalearth)
+```
 
+```{r, echo=TRUE}
 # Read shapefile
 world <- ne_countries(scale = "medium", returnclass = "sf")
 head(world)
@@ -319,17 +321,17 @@ world_utm <- st_transform(world, crs = 32633)
 
 ## R Example 2
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE}
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
 # install.packages("devtools")
 # devtools::install_github("thiyangt/ceylon")
 library(ceylon)
 library(tidyverse)
-library(sp)
-library(sf)
 library(viridis)
 ```
 
 ```{r, echo=TRUE}
+#devtools::install_github("thiyangt/ceylon")
+library(ceylon)
 data(sf_sl_0)
 class(sf_sl_0)
 ```
@@ -414,8 +416,6 @@ ggspatial::annotation_north_arrow(location = "br")+
 1. Convert regular data frame to sf
 
 ```{r, echo=TRUE}
-library(sf)
-library(dplyr)
 
 # Example data frame: cities with lat/lon
 cities <- data.frame(
@@ -531,7 +531,7 @@ polygon_df_sl
 
 Example 2
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # devtools::install_github("UrbanInstitute/urbnmapr")
 library(tidyverse)
 library(magrittr)
@@ -546,6 +546,8 @@ library(geofacet)
 
 
 ```{r, echo=TRUE}
+devtools::install_github("UrbanInstitute/urbnmapr")
+library(urbnmapr)
 statepop1 <- statepop %>% rename(state_name = full)
 head(statepop1)
 statepop2 <- full_join(statepop1, states, by = "state_name")
@@ -645,8 +647,6 @@ oz_states
 2. Projecting your data
 
 ```{r, eval=FALSE, echo=TRUE}
-library(sf)
-library(ggplot2)
 # devtools::install_github("hrbrmstr/albersusa")
 library(albersusa)
 crs_use = "+proj=laea +lat_0=30 +lon_0=-95"
