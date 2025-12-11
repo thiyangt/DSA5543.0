@@ -1,0 +1,30 @@
+## Exercise
+
+1. Write the code to obtain the following plot.
+
+```r
+shape <- st_read(system.file("shape/nc.shp", package="sf")) # included with sf package
+
+cities <- data.frame(name = c("Raleigh", "Greensboro", "Wilmington"),
+                     x = c(-78.633333, -79.819444, -77.912222),
+                     y = c(35.766667, 36.08, 34.223333))
+```
+
+
+```{r}
+library(sf)
+library(ggplot2)
+
+
+shape <- st_read(system.file("shape/nc.shp", package="sf")) # included with sf package
+
+cities <- data.frame(name = c("Raleigh", "Greensboro", "Wilmington"),
+                     x = c(-78.633333, -79.819444, -77.912222),
+                     y = c(35.766667, 36.08, 34.223333),
+                     population = c("high", "medium","low")) %>% 
+  st_as_sf(coords = c("x", "y"), crs = 4326) 
+
+ggplot() +
+  geom_sf(data = shape, fill = NA) +
+  geom_sf_text(data = cities, aes(label = name))
+```

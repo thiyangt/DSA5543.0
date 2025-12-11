@@ -1,0 +1,50 @@
+# Spatial Neighbours
+
+## Package
+
+```{r, echo=TRUE}
+library(spdep)
+library(sf)
+```
+
+## Data
+
+```{r, echo=TRUE}
+columbus <- st_read(system.file("shapes/columbus.gpkg", package="spData")[1], quiet=TRUE)
+columbus
+```
+
+## Explore data structure
+
+```{r, echo=TRUE}
+st_crs(columbus)
+
+```
+
+```{r, echo=TRUE}
+sf::st_geometry(columbus)
+
+```
+
+## Visualise data
+
+`st_geometry()` is an `sf` function that extracts only the geometry from an sf object.
+
+```{r, echo=TRUE}
+st_geometry(columbus)
+```
+
+```{r, echo=TRUE}
+plot(st_geometry(columbus))
+```
+
+Your turn: Use ggplot2 to draw the plot
+
+```{r, eval=FALSE}
+library(ggplot2)
+library(sf)
+
+ggplot(columbus) +
+  geom_sf() +
+  theme_minimal()
+```

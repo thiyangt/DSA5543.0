@@ -1,0 +1,132 @@
+# Spatial Neighbours
+
+## Package
+
+```{r, echo=TRUE}
+library(spdep)
+library(sf)
+```
+
+## Data
+
+```{r, echo=TRUE}
+columbus <- st_read(system.file("shapes/columbus.gpkg", package="spData")[1], quiet=TRUE)
+columbus
+```
+
+## Explore data structure
+
+```{r, echo=TRUE}
+st_crs(columbus)
+
+```
+
+```{r, echo=TRUE}
+sf::st_geometry(columbus)
+
+```
+
+## Visualise data
+
+`st_geometry()` is an `sf` function that extracts only the geometry from an sf object.
+
+```{r, echo=TRUE}
+st_geometry(columbus)
+```
+
+```{r, echo=TRUE}
+plot(st_geometry(columbus))
+```
+
+## Exercise
+
+1. Your turn: Use ggplot2 to draw the plot. 
+
+2. What's wrong here?
+
+```{r, eval=FALSE, echo=TRUE}
+library(ggplot2)
+library(sf)
+
+ggplot(columbus) +
+  geom_sf() +
+  theme_minimal()
+```
+
+```{r, echo=TRUE}
+library(sf)
+library(spdep)
+
+columbus <- st_read(system.file("shapes/columbus.gpkg", package="spData")[1], quiet=TRUE)
+
+nb <- poly2nb(as(columbus, "Spatial"))       # Queen neighbours
+nb
+```
+
+```{r, echo=TRUE}
+coords <- st_coordinates(st_centroid(columbus))
+coords
+```
+
+```{r, echo=TRUE}
+plot(st_geometry(columbus), border = "grey") # polygons
+```
+
+
+```{r, echo=TRUE}
+plot(st_geometry(columbus), border = "grey")
+plot(nb, coords, add = TRUE, col = "red")    # neighbour links
+title("Queen Contiguity Neighbours")
+```
+
+## Exercise: Compute Rook Neighbours
+
+```{r}
+library(sf)
+library(spdep)
+
+columbus <- st_read(system.file("shapes/columbus.gpkg", package="spData")[1], quiet=TRUE)
+
+# Rook contiguity neighbours
+nb_rook <- poly2nb(as(columbus, "Spatial"), queen = FALSE)
+coords <- st_coordinates(st_centroid(columbus))
+
+plot(st_geometry(columbus), border = "grey")
+plot(nb_rook, coords, add = TRUE, col = "blue", lwd = 1.5)
+title("Rook Contiguity Neighbours")
+
+```
+
+## Compare Rook vs Queen Neighbours
+
+```{r, echo=TRUE}
+nb_queen <- poly2nb(as(columbus, "Spatial"), queen = TRUE)
+nb_rook <- poly2nb(as(columbus, "Spatial"), queen = FALSE)
+lengths(nb_queen)   # neighbours with queen
+lengths(nb_rook)    # neighbours with rook
+```
+
+```{r}
+library(sf)
+
+# Load Columbus dataset
+columbus <- st_read(system.file("shapes/columbus.gpkg", package="spData")[1], quiet = TRUE)
+
+# Compute centroids for labeling
+centroids <- st_centroid(st_geometry(columbus))
+coords <- st_coordinates(centroids)
+
+# 1. Plot all polygons (base map)
+plot(st_geometry(columbus), border = "grey", main = "Columbus Polygons with Labels")
+
+# 2. Highlight polygons 1, 2, 3 with red borders
+plot(st_geometry(columbus)[c(1,2,3)], border = "red", lwd = 2, add = TRUE)
+
+# 3. Add labels for all polygons
+text(coords, labels = 1:length(columbus), col = "black", cex = 0.7)
+
+# 4. Optional: add red labels for highlighted polygons
+text(coords[c(1,2,3), ], labels = c(1,2,3), col = "red", cex = 0.8, font = 2)
+
+
+```
