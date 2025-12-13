@@ -1,1 +1,309 @@
-# Fit ARIMA class models using R/ Python
+# Fit ARIMA class models using R
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(tsibble)
+library(lubridate)
+library(feasts)
+library(denguedatahub)
+# install.packages("devtools")
+#devtools::install_github("thiyangt/TourSriLanka")
+library(TourSriLanka)
+library(fable)
+library(fabletools)
+```
+
+## tibble vs tsibble
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+y.tibble <- tibble(
+  Year = 2020:2023,
+  Earnings = c(682.4, 506.9, 1136.3, 2068.0))
+y.tibble
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+y.tsibble <- tsibble(
+  Year = 2020:2023,
+  Earnings = c(682.4, 506.9, 1136.3, 2068.0),
+  index = Year)
+y.tsibble
+```
+
+## Convert tibble to tsibble
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+y.tibble |> as_tsibble(index=Year)
+
+```
+
+## Exercise
+
+Extract dengue.cases.indigenous from china_annual_data and convert it into tsibble.
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+library(denguedatahub)
+china_annual_data
+
+```
+
+## Monthly data
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+library(TourSriLanka)
+data(earnings)
+earnings
+```
+
+## Sort data according to the year
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+earnings <- earnings |>
+  arrange(Year, match(Month, month.name) )
+earnings
+
+```
+
+## Create sequence of dates using lubridate package
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+library(lubridate)
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "years")
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "month")
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "quarter")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "1 week")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "2 week")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "2 months")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd("2009-1-1"), ymd("2023-1-1"), by = "1 day")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+seq(ymd_hm("2015-1-1 0:00"), ymd_hm("2015-1-1 12:00"), by = "hour")
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+y.earnings <- earnings |> mutate(Date = seq(ymd_hm("2009-1-1 0:00"), ymd_hm("2023-12-1 12:00"), by = "month"))
+y.earnings
+```
+
+Create year-month column
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+y.earnings <- y.earnings |>
+  select(Earnings, Date) |> mutate(Time = yearmonth(Date))
+y.earnings
+
+```
+
+Convert it to tsibble
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+ts.earnings <- y.earnings |>
+  select(Earnings, Time) |> as_tsibble(index=Time)
+ts.earnings
+```
+
+##Other time class functions
+
+Quarterly: yearquarter()
+
+Weekly: yearweek()
+
+Your turn: Find about other time class functions.
+
+Help: https://otexts.com/fpp3/tsibbles.html
+
+## Data Visualisation
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+library(feasts)
+ts.earnings |>
+  autoplot(Earnings) +
+  labs(y = "Earnings from tourism (USD Mn)", x="Time") 
+tail(ts.earnings)
+```
+
+## Obtain ACF and PACF
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+
+end_time <- max(ts.earnings$Time)
+end_time 
+train <- ts.earnings %>%
+  filter(Time <= end_time - 12)
+
+test <- ts.earnings %>%
+  filter(Time > end_time - 12)
+
+head(train)
+tail(train)
+head(test)
+tail(test)
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+library(feasts)
+train |>
+  autoplot(Earnings)
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  ACF(Earnings) |>
+  autoplot() +
+  labs(title = "ACF Plot of Value")
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  PACF(Earnings) |>
+  autoplot() +
+  labs(title = "PACF Plot of Value")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(Value_diff = difference(Earnings)) |>  # Take first difference
+  ACF(Value_diff, na_action = "omit", lag_max=37) |>    # Compute ACF
+  autoplot() +
+  labs(title = "ACF Plot of Differenced Value")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(Value_diff = difference(Earnings)) |>  # Take first difference
+  PACF(Value_diff, na_action = "omit", lag_max=37) |>    # Compute ACF
+  autoplot() +
+  labs(title = "PACF Plot of Differenced Value")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(sdiff1 = difference(Earnings, lag = 12)) |>  # Take first difference
+  ACF(sdiff1, na_action = "omit") |>    # Compute ACF
+  autoplot() +
+  labs(title = "ACF Plot of Seasonally Differenced Value")
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(sdiff1 = difference(Earnings, lag = 12)) |>  # Take first difference
+  PACF(sdiff1, na_action = "omit") |>    # Compute ACF
+  autoplot() +
+  labs(title = "PACF Plot of Seasonally Differenced Value")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(
+    diff_both = difference(difference(Earnings, lag = 1), lag = 12)
+  ) |>
+  ACF(diff_both, na_action = "omit") |>
+  autoplot() +
+  labs(title = "ACF: First + Seasonal Differenced Earnings")
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+train |>
+  mutate(
+    diff_both = difference(difference(Earnings, lag = 1), lag = 12)
+  ) |>
+  PACF(diff_both, na_action = "omit") |>
+  autoplot() +
+  labs(title = "PACF: First + Seasonal Differenced Earnings")
+```
+
+
+
+## Fitting a SARIMA model: Auto
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+sarima_auto <- train |>
+  model(
+    auto = ARIMA(Earnings ~ pdq() + PDQ(period = 12))
+  )
+
+# View model summary
+report(sarima_auto)
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+h_test <- nrow(test)
+
+fc <- sarima_auto |>
+  forecast(h = h_test)
+fc
+```
+
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+#library(fabletools)
+
+accuracy(fc, test)
+```
+
+## Fitting a SARIMA model: Manual
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+sarima_111_110 <- train |>
+  model(
+    SARIMA = ARIMA(
+      Earnings ~ 
+        pdq(2, 1, 2) + 
+        PDQ(0, 1, 0, period = 12)
+    )
+  )
+
+report(sarima_111_110)
+fcmanual <- sarima_111_110 |>
+  forecast(h = h_test)
+fcmanual
+accuracy(fcmanual, test)
+sarima_111_110 |>
+  gg_tsresiduals()
+```
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+sarima_313_100 <- train |>
+  model(
+    SARIMA = ARIMA(
+      Earnings ~ 
+        pdq(3, 1, 3) + 
+        PDQ(1, 0, 0, period = 12)
+    )
+  )
+
+report(sarima_313_100)
+fcmanual2 <- sarima_313_100 |>
+  forecast(h = h_test)
+fcmanual2
+accuracy(fcmanual2, test)
+```
