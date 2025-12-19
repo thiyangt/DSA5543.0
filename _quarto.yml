@@ -14,8 +14,11 @@ book:
     - "04-chap4.qmd"
     - "05-chap5.qmd"
     - "06-chap6.qmd"
-    - "07-chap7.qmd"
+    - "07-chap07.qmd"
     - "08-chap8.qmd"
+    - "09-chap9.qmd"
+    - "10-chap10.qmd"
+    - "11-chap11.qmd"
     - "refs.qmd"
   sidebar:
     style: "docked"

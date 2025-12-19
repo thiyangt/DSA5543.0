@@ -1,0 +1,5 @@
+
+# Spatial Data Science
+
+
+Link to slides: <https://thiyangt.github.io/spatialmodellingversion2/#/title-slide>

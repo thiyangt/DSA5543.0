@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>8&nbsp; Reading, Exploring, and Visualising Spatial Data with sf (Cont. Chapter 6) – DSA 554 3.0 Spatio-temporal Data Analysis</title>
+<title>9&nbsp; Spatial Neighbours – DSA 554 3.0 Spatio-temporal Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./09-chap9.html" rel="next">
-<link href="./07-chap07.html" rel="prev">
+<link href="./10-chap10.html" rel="next">
+<link href="./08-chap8.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-chap8.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reading, Exploring, and Visualising Spatial Data with <code>sf</code> (Cont. Chapter 6)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-chap9.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Neighbours</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,14 +176,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-chap8.html" class="sidebar-item-text sidebar-link active">
+  <a href="./08-chap8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reading, Exploring, and Visualising Spatial Data with <code>sf</code> (Cont. Chapter 6)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-chap9.html" class="sidebar-item-text sidebar-link">
+  <a href="./09-chap9.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Neighbours</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">10-chap10.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -200,16 +206,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title"><b>Sections</b></h2>
    
   <ul class="collapse">
-<li><a href="#package" id="toc-package" class="nav-link active" data-scroll-target="#package"><span class="header-section-number">8.1</span> Package</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">8.2</span> Data</a></li>
-  <li><a href="#explore-data-structure" id="toc-explore-data-structure" class="nav-link" data-scroll-target="#explore-data-structure"><span class="header-section-number">8.3</span> Explore data structure</a></li>
-  <li><a href="#visualise-data" id="toc-visualise-data" class="nav-link" data-scroll-target="#visualise-data"><span class="header-section-number">8.4</span> Visualise data</a></li>
+<li><a href="#package" id="toc-package" class="nav-link active" data-scroll-target="#package"><span class="header-section-number">9.1</span> Package</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">9.2</span> Data</a></li>
+  <li><a href="#explore-data-structure" id="toc-explore-data-structure" class="nav-link" data-scroll-target="#explore-data-structure"><span class="header-section-number">9.3</span> Explore data structure</a></li>
+  <li><a href="#visualise-data" id="toc-visualise-data" class="nav-link" data-scroll-target="#visualise-data"><span class="header-section-number">9.4</span> Visualise data</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">9.5</span> Exercise</a></li>
+  <li><a href="#exercise-compute-rook-neighbours" id="toc-exercise-compute-rook-neighbours" class="nav-link" data-scroll-target="#exercise-compute-rook-neighbours"><span class="header-section-number">9.6</span> Exercise: Compute Rook Neighbours</a></li>
+  <li><a href="#compare-rook-vs-queen-neighbours" id="toc-compare-rook-vs-queen-neighbours" class="nav-link" data-scroll-target="#compare-rook-vs-queen-neighbours"><span class="header-section-number">9.7</span> Compare Rook vs Queen Neighbours</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reading, Exploring, and Visualising Spatial Data with <code>sf</code> (Cont. Chapter 6)</span>
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Neighbours</span>
 </h1>
 </div>
 
@@ -224,14 +233,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><section id="package" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="package">
-<span class="header-section-number">8.1</span> Package</h2>
+</header><section id="package" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="package">
+<span class="header-section-number">9.1</span> Package</h2>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spdep/">spdep</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="data">
-<span class="header-section-number">8.2</span> Data</h2>
+</section><section id="data" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="data">
+<span class="header-section-number">9.2</span> Data</h2>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">columbus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shapes/columbus.gpkg"</span>, package<span class="op">=</span><span class="st">"spData"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">columbus</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -277,8 +286,8 @@ First 10 features:
 10 POLYGON ((10.08251 13.03377...</code></pre>
 </div>
 </div>
-</section><section id="explore-data-structure" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="explore-data-structure">
-<span class="header-section-number">8.3</span> Explore data structure</h2>
+</section><section id="explore-data-structure" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="explore-data-structure">
+<span class="header-section-number">9.3</span> Explore data structure</h2>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -307,8 +316,8 @@ Projected CRS: Undefined Cartesian SRS with unknown unit
 First 5 geometries:</code></pre>
 </div>
 </div>
-</section><section id="visualise-data" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="visualise-data">
-<span class="header-section-number">8.4</span> Visualise data</h2>
+</section><section id="visualise-data" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="visualise-data">
+<span class="header-section-number">9.4</span> Visualise data</h2>
 <p><code><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry()</a></code> is an <code>sf</code> function that extracts only the geometry from an sf object.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -325,12 +334,151 @@ First 5 geometries:</code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="08-chap8_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><img src="09-chap9_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Your turn: Use ggplot2 to draw the plot</p>
+</section><section id="exercise" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="exercise">
+<span class="header-section-number">9.5</span> Exercise</h2>
+<ol type="1">
+<li><p>Your turn: Use ggplot2 to draw the plot.</p></li>
+<li><p>What’s wrong here?</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spdep/">spdep</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">columbus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shapes/columbus.gpkg"</span>, package<span class="op">=</span><span class="st">"spData"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/spdep/reference/poly2nb.html">poly2nb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">columbus</span>, <span class="st">"Spatial"</span><span class="op">)</span><span class="op">)</span>       <span class="co"># Queen neighbours</span></span>
+<span><span class="va">nb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Neighbour list object:
+Number of regions: 49 
+Number of nonzero links: 236 
+Percentage nonzero weights: 9.829238 
+Average number of links: 4.816327 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">coords</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              X        Y
+ [1,]  8.827218 14.36908
+ [2,]  8.332658 14.03162
+ [3,]  9.012265 13.81972
+ [4,]  8.460801 13.71696
+ [5,]  9.007982 13.29637
+ [6,]  9.739926 13.47463
+ [7,]  8.118750 13.29570
+ [8,]  8.496488 13.40261
+ [9,]  9.630793 12.94272
+[10,] 10.366383 13.00189
+[11,]  8.669735 12.98012
+[12,]  8.544996 12.95313
+[13,]  8.349223 12.99609
+[14,]  8.292702 12.86371
+[15,]  8.973462 12.74159
+[16,]  8.655866 12.62732
+[17,] 10.528621 12.64748
+[18,]  8.487918 12.54534
+[19,]  8.312368 12.66672
+[20,] 10.190582 12.25690
+[21,]  7.847424 12.08500
+[22,]  9.655244 12.46277
+[23,] 10.671381 12.29157
+[24,]  8.420744 12.31801
+[25,]  8.938752 12.38051
+[26,]  9.250921 12.41378
+[27,]  9.737004 12.14969
+[28,]  9.297976 11.97779
+[29,]  8.977862 11.99401
+[30,]  8.688719 11.93872
+[31,]  6.892482 11.91415
+[32,] 10.763784 11.84443
+[33,]  9.783876 11.92271
+[34,]  7.339431 11.62855
+[35,]  9.668249 11.69254
+[36,]  6.728838 11.63436
+[37,]  8.912363 11.63031
+[38,]  9.210527 11.65984
+[39,]  6.221943 11.40251
+[40,] 10.492493 11.50720
+[41,] 10.953587 11.47925
+[42,]  7.110051 11.29544
+[43,]  9.214330 11.43277
+[44,]  9.641904 11.39104
+[45,]  8.910340 11.14864
+[46,]  6.423385 11.21924
+[47,] 10.935302 11.01003
+[48,]  9.251957 11.18125
+[49,]  9.492144 11.01496</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span>, border <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="co"># polygons</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="09-chap9_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">columbus</span><span class="op">)</span>, border <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nb</span>, <span class="va">coords</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>    <span class="co"># neighbour links</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Queen Contiguity Neighbours"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="09-chap9_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="exercise-compute-rook-neighbours" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="exercise-compute-rook-neighbours">
+<span class="header-section-number">9.6</span> Exercise: Compute Rook Neighbours</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="09-chap9_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="compare-rook-vs-queen-neighbours" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="compare-rook-vs-queen-neighbours">
+<span class="header-section-number">9.7</span> Compare Rook vs Queen Neighbours</h2>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nb_queen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/spdep/reference/poly2nb.html">poly2nb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">columbus</span>, <span class="st">"Spatial"</span><span class="op">)</span>, queen <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">nb_rook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/spdep/reference/poly2nb.html">poly2nb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">columbus</span>, <span class="st">"Spatial"</span><span class="op">)</span>, queen <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html">lengths</a></span><span class="op">(</span><span class="va">nb_queen</span><span class="op">)</span>   <span class="co"># neighbours with queen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2  3  4  4  8  2  4  6  8  4  5  6  4  6  6  8  3  4  3 10  3  6  3  7  8
+[26]  6  4  9  7  5  3  4  4  4  7  5  6  6  3  5  3  2  6  5  4  2  2  4  3</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html">lengths</a></span><span class="op">(</span><span class="va">nb_rook</span><span class="op">)</span>    <span class="co"># neighbours with rook</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2 3 4 4 7 2 3 5 6 3 4 5 3 6 4 7 3 4 3 9 3 5 3 6 5 4 4 7 4 4 2 4 4 4 5 5 5 4
+[39] 2 4 3 2 5 4 4 2 2 4 3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="09-chap9_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -750,13 +898,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./07-chap07.html" class="pagination-link" aria-label="Exercise">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exercise</span></span>
+      <a href="./08-chap8.html" class="pagination-link" aria-label="Reading, Exploring, and Visualising Spatial Data with `sf` (Cont. Chapter 6)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reading, Exploring, and Visualising Spatial Data with <code>sf</code> (Cont. Chapter 6)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09-chap9.html" class="pagination-link" aria-label="Spatial Neighbours">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spatial Neighbours</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-chap10.html" class="pagination-link" aria-label="10-chap10.html">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">10-chap10.html</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
