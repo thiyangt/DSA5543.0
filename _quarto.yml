@@ -18,7 +18,6 @@ book:
     - "08-chap8.qmd"
     - "09-chap9.qmd"
     - "10-chap10.qmd"
-    - "11-chap11.qmd"
     - "refs.qmd"
   sidebar:
     style: "docked"

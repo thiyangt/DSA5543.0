@@ -1,4 +1,59 @@
 
 # Interactive Map Visualisation
 
+```{r,echo=TRUE, warning=FALSE, message=FALSE}
+# install.packages("devtools")
+#devtools::install_github("thiyangt/ceylon")
+library(ceylon)
+
+
+```
+
+```{r}
+library(mapview)
+library(leaflet)
+library(ggplot2)
+library(viridis)
+library(leaflet)
+library(sf)
+library(viridis)
+```
+
+## Static Plot
+
+```{r,  echo=TRUE, warning=FALSE, message=FALSE}
+ggplot(province) + 
+  geom_sf(mapping = aes(fill = population), show.legend = TRUE) + scale_fill_viridis()
+```
+
+
+## Using mapview
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+mapview(
+  province,
+  zcol = "population",
+  legend = TRUE
+)
+
+```
+
+
+## Using leaflet
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+
+m <- leaflet() %>%
+  addTiles() %>%  # OpenStreetMap tiles
+  addMarkers(
+    lng = 79.8612,
+    lat = 6.9271,
+    popup = "Colombo, Sri Lanka"
+  )
+m
+#htmltools::save_html(m, file = "../HtmlWidget/leaflet-sri-lanka.html")
+
+```
+
+
 
