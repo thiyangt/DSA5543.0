@@ -10,13 +10,13 @@ library(ceylon)
 ```
 
 ```{r}
-library(mapview)
 library(leaflet)
 library(ggplot2)
 library(viridis)
 library(leaflet)
 library(sf)
 library(viridis)
+library(mapview)
 ```
 
 ## Static Plot
@@ -30,6 +30,7 @@ ggplot(province) +
 ## Using mapview
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
+
 mapview(
   province,
   zcol = "population",
@@ -56,4 +57,45 @@ m
 ```
 
 
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(leaflet)
 
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(
+    lng = c(-118.2437, -74.0060),
+    lat = c(34.0522, 40.7128),
+    popup = c("Los Angeles, CA", "New York City, NY")
+  ) %>%
+  addRectangles(
+    lng1 = 79.6, lat1 = 5.9,   # bottom-left
+    lng2 = 81.9, lat2 = 9.9,   # top-right
+    fill = FALSE,
+    color = "red",
+    weight = 2,
+    popup = "Sri Lanka Bounding Box"
+  )
+
+```
+
+## Exercise
+
+Write the code to obtain the following plot
+
+```{r}
+library(leaflet)
+
+leaflet() %>%
+  addTiles() %>%
+  setView(
+    lng = 80.7718,  # Sri Lanka center longitude
+    lat = 7.8731,   # Sri Lanka center latitude
+    zoom = 7
+  ) %>%
+  addMarkers(
+    lng = c(79.8612, 80.6337),
+    lat = c(6.9271, 7.2906),
+    popup = c("Colombo", "Kandy")
+  )
+
+```
