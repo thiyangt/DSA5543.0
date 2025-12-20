@@ -313,7 +313,7 @@
 
 \markboth{Copyright notice}{Copyright notice}
 
-Produced on 19 December 2025.
+Produced on 20 December 2025.
 
 © Thiyanga S. Talagala (2025).
 
@@ -7092,6 +7092,212 @@ Visualisation}\label{interactive-map-visualisation}
 \CommentTok{\#htmltools::save\_html(m, file = "../HtmlWidget/leaflet{-}sri{-}lanka.html")}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(leaflet)}
+
+\FunctionTok{leaflet}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{addTiles}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{addMarkers}\NormalTok{(}
+    \AttributeTok{lng =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{118.2437}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{74.0060}\NormalTok{),}
+    \AttributeTok{lat =} \FunctionTok{c}\NormalTok{(}\FloatTok{34.0522}\NormalTok{, }\FloatTok{40.7128}\NormalTok{),}
+    \AttributeTok{popup =} \FunctionTok{c}\NormalTok{(}\StringTok{"Los Angeles, CA"}\NormalTok{, }\StringTok{"New York City, NY"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{addRectangles}\NormalTok{(}
+    \AttributeTok{lng1 =} \FloatTok{79.6}\NormalTok{, }\AttributeTok{lat1 =} \FloatTok{5.9}\NormalTok{,   }\CommentTok{\# bottom{-}left}
+    \AttributeTok{lng2 =} \FloatTok{81.9}\NormalTok{, }\AttributeTok{lat2 =} \FloatTok{9.9}\NormalTok{,   }\CommentTok{\# top{-}right}
+    \AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"red"}\NormalTok{,}
+    \AttributeTok{weight =} \DecValTok{2}\NormalTok{,}
+    \AttributeTok{popup =} \StringTok{"Sri Lanka Bounding Box"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{11-chap11_files/figure-pdf/unnamed-chunk-6-1.pdf}}
+
+\section{Exercise}\label{exercise-5}
+
+Write the code to obtain the following plot
+
+\pandocbounded{\includegraphics[keepaspectratio]{11-chap11_files/figure-pdf/unnamed-chunk-7-1.pdf}}
+
+\bookmarksetup{startatroot}
+
+\chapter{\texorpdfstring{\texttt{meuse}
+dataset}{meuse dataset}}\label{meuse-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sp)}
+\FunctionTok{library}\NormalTok{(gstat)}
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{library}\NormalTok{(mapview)}
+
+\FunctionTok{data}\NormalTok{(meuse)}
+\FunctionTok{data}\NormalTok{(meuse.grid)}
+\FunctionTok{head}\NormalTok{(meuse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       x      y cadmium copper lead zinc  elev       dist   om ffreq soil lime
+1 181072 333611    11.7     85  299 1022 7.909 0.00135803 13.6     1    1    1
+2 181025 333558     8.6     81  277 1141 6.983 0.01222430 14.0     1    1    1
+3 181165 333537     6.5     68  199  640 7.800 0.10302900 13.0     1    1    1
+4 181298 333484     2.6     81  116  257 7.655 0.19009400  8.0     1    2    0
+5 181307 333330     2.8     48  117  269 7.480 0.27709000  8.7     1    2    0
+6 181390 333260     3.0     61  137  281 7.791 0.36406700  7.8     1    2    0
+  landuse dist.m
+1      Ah     50
+2      Ah     30
+3      Ah    150
+4      Ga    270
+5      Ah    380
+6      Ga    470
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(meuse.grid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       x      y part.a part.b      dist soil ffreq
+1 181180 333740      1      0 0.0000000    1     1
+2 181140 333700      1      0 0.0000000    1     1
+3 181180 333700      1      0 0.0122243    1     1
+4 181220 333700      1      0 0.0434678    1     1
+5 181100 333660      1      0 0.0000000    1     1
+6 181140 333660      1      0 0.0122243    1     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meuse }\OtherTok{\textless{}{-}} \FunctionTok{st\_as\_sf}\NormalTok{(meuse, }\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{28992}\NormalTok{)}
+\NormalTok{meuse}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Simple feature collection with 155 features and 12 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 178605 ymin: 329714 xmax: 181390 ymax: 333611
+Projected CRS: Amersfoort / RD New
+First 10 features:
+   cadmium copper lead zinc  elev       dist   om ffreq soil lime landuse
+1     11.7     85  299 1022 7.909 0.00135803 13.6     1    1    1      Ah
+2      8.6     81  277 1141 6.983 0.01222430 14.0     1    1    1      Ah
+3      6.5     68  199  640 7.800 0.10302900 13.0     1    1    1      Ah
+4      2.6     81  116  257 7.655 0.19009400  8.0     1    2    0      Ga
+5      2.8     48  117  269 7.480 0.27709000  8.7     1    2    0      Ah
+6      3.0     61  137  281 7.791 0.36406700  7.8     1    2    0      Ga
+7      3.2     31  132  346 8.217 0.19009400  9.2     1    2    0      Ah
+8      2.8     29  150  406 8.490 0.09215160  9.5     1    1    0      Ab
+9      2.4     37  133  347 8.668 0.18461400 10.6     1    1    0      Ab
+10     1.6     24   80  183 9.049 0.30970200  6.3     1    2    0       W
+   dist.m              geometry
+1      50 POINT (181072 333611)
+2      30 POINT (181025 333558)
+3     150 POINT (181165 333537)
+4     270 POINT (181298 333484)
+5     380 POINT (181307 333330)
+6     470 POINT (181390 333260)
+7     240 POINT (181165 333370)
+8     120 POINT (181027 333363)
+9     240 POINT (181060 333231)
+10    420 POINT (181232 333168)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapview}\NormalTok{(meuse, }\AttributeTok{zcol =} \StringTok{"zinc"}\NormalTok{,  }\AttributeTok{map.types =} \StringTok{"CartoDB.Voyager"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{12-chap12_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meuse.grid }\OtherTok{\textless{}{-}} \FunctionTok{st\_as\_sf}\NormalTok{(meuse.grid, }\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{),}
+                       \AttributeTok{crs =} \DecValTok{28992}\NormalTok{)}
+\FunctionTok{mapview}\NormalTok{(meuse.grid,  }\AttributeTok{map.types =} \StringTok{"CartoDB.Voyager"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{12-chap12_files/figure-pdf/unnamed-chunk-1-2.pdf}}
+
+\section{Variogram Cloud}\label{variogram-cloud}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load packages}
+\FunctionTok{library}\NormalTok{(sp)}
+\FunctionTok{library}\NormalTok{(gstat)}
+
+\CommentTok{\# Load Meuse data}
+\FunctionTok{data}\NormalTok{(meuse)}
+\FunctionTok{coordinates}\NormalTok{(meuse) }\OtherTok{\textless{}{-}} \ErrorTok{\textasciitilde{}}\NormalTok{x}\SpecialCharTok{+}\NormalTok{y}
+
+\CommentTok{\# Log{-}transform zinc}
+\NormalTok{meuse}\SpecialCharTok{$}\NormalTok{logZinc }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(meuse}\SpecialCharTok{$}\NormalTok{zinc)}
+\CommentTok{\# Compute variogram cloud (all pairs, raw semivariance)}
+\NormalTok{cloud }\OtherTok{\textless{}{-}} \FunctionTok{variogram}\NormalTok{(logZinc}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{, meuse, }\AttributeTok{cloud =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# View first few points}
+\FunctionTok{head}\NormalTok{(cloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       dist       gamma dir.hor dir.ver   id left right
+1  70.83784 0.006065804       0       0 var1    2     1
+2 118.84864 0.109534743       0       0 var1    3     1
+3 141.56624 0.167153095       0       0 var1    3     2
+4 259.23927 0.952808244       0       0 var1    4     1
+5 282.85155 1.110920725       0       0 var1    4     2
+6 143.17123 0.416229664       0       0 var1    4     3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot variogram cloud}
+\FunctionTok{plot}\NormalTok{(cloud}\SpecialCharTok{$}\NormalTok{dist, cloud}\SpecialCharTok{$}\NormalTok{gamma,}
+     \AttributeTok{xlab =} \StringTok{"Distance (m)"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Semivariance"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Variogram Cloud"}\NormalTok{,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{12-chap12_files/figure-pdf/unnamed-chunk-2-1.pdf}}
+
+\section{h-scatterplot}\label{h-scatterplot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sp)}
+\FunctionTok{data}\NormalTok{(meuse)}
+\FunctionTok{coordinates}\NormalTok{(meuse) }\OtherTok{=} \ErrorTok{\textasciitilde{}}\NormalTok{x}\SpecialCharTok{+}\NormalTok{y}
+\FunctionTok{hscat}\NormalTok{(}\FunctionTok{log}\NormalTok{(zinc)}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{, meuse, }\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{1000}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{12-chap12_files/figure-pdf/unnamed-chunk-3-1.pdf}}
+
+\section{Sample variogram}\label{sample-variogram}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v }\OtherTok{\textless{}{-}} \FunctionTok{variogram}\NormalTok{(}\FunctionTok{log}\NormalTok{(zinc) }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ meuse)}
+\FunctionTok{plot}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{12-chap12_files/figure-pdf/unnamed-chunk-4-1.pdf}}
 
 \bookmarksetup{startatroot}
 

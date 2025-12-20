@@ -1,0 +1,67 @@
+# meuse dataset 
+
+
+```{r, echo=TRUE}
+library(sp)
+library(gstat)
+library(sf)
+library(mapview)
+
+data(meuse)
+data(meuse.grid)
+head(meuse)
+head(meuse.grid)
+meuse <- st_as_sf(meuse, coords = c("x", "y"), crs = 28992)
+meuse
+mapview(meuse, zcol = "zinc",  map.types = "CartoDB.Voyager")
+
+meuse.grid <- st_as_sf(meuse.grid, coords = c("x", "y"),
+                       crs = 28992)
+mapview(meuse.grid,  map.types = "CartoDB.Voyager")
+```
+
+## Variogram Cloud
+
+```{r, echo=TRUE}
+# Load packages
+library(sp)
+library(gstat)
+
+# Load Meuse data
+data(meuse)
+coordinates(meuse) <- ~x+y
+
+# Log-transform zinc
+meuse$logZinc <- log(meuse$zinc)
+# Compute variogram cloud (all pairs, raw semivariance)
+cloud <- variogram(logZinc~1, meuse, cloud = TRUE)
+
+# View first few points
+head(cloud)
+
+# Plot variogram cloud
+plot(cloud$dist, cloud$gamma,
+     xlab = "Distance (m)",
+     ylab = "Semivariance",
+     main = "Variogram Cloud",
+     pch = 19, col = "blue")
+
+```
+
+## h-scatterplot
+
+```{r, echo=TRUE}
+library(sp)
+data(meuse)
+coordinates(meuse) = ~x+y
+hscat(log(zinc)~1, meuse, c(0, 80, 120, 250, 500, 1000))
+
+
+```
+
+## Sample variogram
+
+```{r, echo=TRUE}
+v <- variogram(log(zinc) ~ 1, data = meuse)
+plot(v)
+```

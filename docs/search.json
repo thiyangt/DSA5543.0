@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "",
+    "text": "Copyright notice\nProduced on 20 December 2025.\n© Thiyanga S. Talagala (2025).",
+    "crumbs": [
+      "Front matter"
+    ]
+  },
+  {
+    "objectID": "12-chap12.html",
+    "href": "12-chap12.html",
+    "title": "\n12  meuse dataset\n",
+    "section": "",
+    "text": "12.1 Variogram Cloud\n# Load packages\nlibrary(sp)\nlibrary(gstat)\n\n# Load Meuse data\ndata(meuse)\ncoordinates(meuse) &lt;- ~x+y\n\n# Log-transform zinc\nmeuse$logZinc &lt;- log(meuse$zinc)\n# Compute variogram cloud (all pairs, raw semivariance)\ncloud &lt;- variogram(logZinc~1, meuse, cloud = TRUE)\n\n# View first few points\nhead(cloud)\n\n       dist       gamma dir.hor dir.ver   id left right\n1  70.83784 0.006065804       0       0 var1    2     1\n2 118.84864 0.109534743       0       0 var1    3     1\n3 141.56624 0.167153095       0       0 var1    3     2\n4 259.23927 0.952808244       0       0 var1    4     1\n5 282.85155 1.110920725       0       0 var1    4     2\n6 143.17123 0.416229664       0       0 var1    4     3\n\n# Plot variogram cloud\nplot(cloud$dist, cloud$gamma,\n     xlab = \"Distance (m)\",\n     ylab = \"Semivariance\",\n     main = \"Variogram Cloud\",\n     pch = 19, col = \"blue\")",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>meuse dataset</span>"
+    ]
+  },
+  {
+    "objectID": "12-chap12.html#h-scatterplot",
+    "href": "12-chap12.html#h-scatterplot",
+    "title": "\n12  meuse dataset\n",
+    "section": "\n12.2 h-scatterplot",
+    "text": "12.2 h-scatterplot\n\nlibrary(sp)\ndata(meuse)\ncoordinates(meuse) = ~x+y\nhscat(log(zinc)~1, meuse, c(0, 80, 120, 250, 500, 1000))",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>meuse dataset</span>"
+    ]
+  },
+  {
+    "objectID": "12-chap12.html#sample-variogram",
+    "href": "12-chap12.html#sample-variogram",
+    "title": "\n12  meuse dataset\n",
+    "section": "\n12.3 Sample variogram",
+    "text": "12.3 Sample variogram\n\nv &lt;- variogram(log(zinc) ~ 1, data = meuse)\nplot(v)",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>meuse dataset</span>"
+    ]
+  }
+]
