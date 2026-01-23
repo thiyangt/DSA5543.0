@@ -20,6 +20,7 @@ book:
     - "10-chap10.qmd"
     - "11-chap11.qmd"
     - "12-chap12.qmd"
+    - "13-chap13.qmd"
     - "refs.qmd"
   sidebar:
     style: "docked"

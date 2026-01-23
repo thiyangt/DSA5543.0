@@ -1,0 +1,256 @@
+# Spatio-temporal Forecasting
+
+## Packages
+
+```{r}
+library(sp)
+library(xts)
+library(spacetime)
+library(gstat)
+
+```
+
+## Data
+
+Air quality data obtained from the airBase European air quality data base. Daily averages for rural background stations in Germany, 1998-2009. In addition, NUTS1 regions (states, or Bundeslaender) for Germany to illustrate spatial aggregation over irregular regions.
+
+```{r, echo=TRUE}
+data(air)
+#head(air)
+ls()
+```
+
+`air`: matrix of 70 rows, i.e., observation stations, with names given as
+rownames(air), and 4383 columns, i.e., air quality measurements
+
+`stations` : coördinates of the stations; no other information; this is of class
+SpatialPoints, i.e., there is no data.frame associated with the
+points.
+
+`dates` : the dates of observations, one for each column in the air matrix;this is of class Date.
+
+`DE_NUTS1` : polygons of German states (1st level divisions); this is of class
+SpatialPolygonsDataFrame
+
+```{r, echo=TRUE}
+summary(stations)
+```
+
+Rural stations
+
+```{r, echo=TRUE}
+rural <- STFDF(stations, dates, data.frame(PM10 = as.vector(air)))
+
+```
+
+Find the longest time-series in the rural object.
+
+```{r, echo=TRUE}
+max.not.na <- 0; longest.station <- 1
+
+for (station in 1:dim(rural)["space"]) {
+ts <- rural[station,][,"PM10"]
+(ix <- sum(!is.na(ts)))
+if (ix > max.not.na) { max.not.na <- ix; longest.station <- station }
+}
+
+
+longest.station.name <- row.names(rural@sp@coords)[longest.station]
+print(paste0("Station ", longest.station, " (",
+longest.station.name,
+") has ", max.not.na, " PM10 readings"))
+
+long.ts <- rural[longest.station,]
+rm(max.not.na, longest.station, station)
+
+```
+
+```{r, echo=TRUE}
+spacetime::plot(long.ts$PM10, lwd=0.5,
+main=paste("PM10 at",longest.station.name))
+
+```
+
+Restrict the data to the time period from 2005 to 2010 inclusive.
+
+```{r, echo=TRUE}
+rr <- rural[, "2005::2010"]
+class(rr)
+
+
+
+length(rural@data$PM10)
+
+length(rr@data$PM10)
+
+```
+
+Missing values for stations
+
+```{r, echo=TRUE}
+dim(rr)
+
+(na.stations <- which(apply(as(rr, "xts"), 2, function(x) all(is.na(x)))))
+length(na.stations)
+```
+
+Remove stations with missing value
+
+```{r, echo=TRUE}
+r5to10 <- rr[-na.stations,]
+rm(na.stations)
+dim(r5to10)
+```
+
+```{r, echo=TRUE}
+summary(r5to10)
+
+```
+
+```{r, echo=TRUE}
+station.ids <- attributes(r5to10@sp@coords)$dimnames[[1]]
+station.ids
+station.ids <- substr(station.ids, start=3, stop=7)
+```
+
+Plot the locations
+
+```{r, echo=TRUE}
+(aspect.ratio <- cos(median(coordinates(r5to10@sp)[,2])))
+plot(coordinates(r5to10@sp), pch=3, col="red",
+cex=0.5, asp=1/aspect.ratio,
+xlab="E", ylab="N")
+grid()
+text(coordinates(r5to10@sp), labels=station.ids, pos=4, cex=0.8)
+
+```
+
+Your turn: use ggplot to draw the plot
+
+Extract the stations in Nordrhein-Westfalen.
+
+```{r, echo=TRUE}
+ix <- (substr(station.ids, start=1, stop=2)=="NW")
+dim(r5to10)
+r5to10nrw <- r5to10[ix,]
+
+r5to10nrw
+dim(r5to10nrw)
+
+```
+
+## Cross correlation
+
+Does variable A lead or lag variable B?
+
+
+If rainfall peaks 3–6 weeks before dengue increases → strong cross-correlation at lag +3 to +6.
+
+When we compute cross-correlation, we deliberately shift one time series relative to the other and ask:
+
+How similar are they after shifting?
+
+“How does the predictor at time $t−k$ relate to the response at time $t$?”
+
+Here, 
+
+$k$ is the lag.
+
+Positive lag → predictor comes before response
+
+Rainfall at week $t−4$
+
+Dengue cases at week $t$
+
+If cross-correlation is strongest at lag +4:
+
+Rainfall leads dengue by about 4 weeks.
+
+Negative lag
+
+If dengue cases at week $t$ correlate with rainfall at week $t+3$.
+
+Dengue seems to lead rainfall, which is not correct.
+
+Negative lags are not “wrong” — they just need careful interpretation.
+
+cross-correlations between
+the stations in NRW
+
+```{r, echo=TRUE, fig.height=10}
+acf(na.omit(as(r5to10nrw, "xts")), xlab="", ylab="")
+
+```
+
+Stations 068 and 081 also have strong lag-0 cross-correlation.
+
+The weakest cross-correlation is between stations 081 and 064.
+
+## Investigate Spatio-temporal Structure
+
+```{r, echo=TRUE, cache=TRUE}
+vst <- variogramST(PM10 ~ 1, r5to10)
+summary(vst)
+plot(vst, xlab="separation (km)", ylab="separation (+days)",
+main="Semivariance, PM10")
+plot(vst, map = FALSE, xlab="separation (km)",
+ylab = "Semivariance, PM10")
+library(lattice)
+plot(vst, wireframe=TRUE)
+
+```
+
+## How to read it 
+
+### 1. Near the origin (small distance, small time)
+
+- Colors indicate low variability / high similarity
+
+- Strong local space–time dependence
+
+This is where prediction power comes from.
+
+### 2. Moving right (increasing distance)
+
+Colors change quickly → spatial influence is very local
+
+Change slowly → long-range spatial dependence
+
+### 3. Moving up (increasing time lag)
+
+Slow color change → long temporal memory
+
+Fast change → short temporal memory
+
+## 4. Diagonal or curved patterns (the key insight)
+
+
+bend or tilt diagonally → space–time interaction
+
+stay rectangular / grid-like → separable structure
+
+This is what tells you whether space and time act independently.
+
+## What are parallel spatial variograms, one per time lag?
+
+You are doing the following:
+
+Fix a time lag (e.g., 1 week, 2 weeks, 4 weeks)
+
+For that fixed time lag, compute a spatial variogram
+
+variability vs spatial distance only
+
+Repeat this for multiple time lags
+
+Plot all these spatial variograms on the same axes
+
+So each curve represents:
+
+“How spatial dependence behaves when observations are separated by a specific amount of time.”
+
+If the spatial variograms are roughly parallel
+
+This tells you:
+
+The spatial dependence structure is stable across time lags.
