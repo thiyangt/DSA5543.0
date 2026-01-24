@@ -21,6 +21,8 @@ book:
     - "11-chap11.qmd"
     - "12-chap12.qmd"
     - "13-chap13.qmd"
+    - "14-chap14.qmd"
+    - "15-chap15.qmd"
     - "refs.qmd"
   sidebar:
     style: "docked"

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
     "section": "",
-    "text": "Copyright notice\nProduced on 20 December 2025.\n© Thiyanga S. Talagala (2025).",
+    "text": "Copyright notice\nProduced on 24 January 2026.\n© Thiyanga S. Talagala (2026).",
     "crumbs": [
       "Front matter"
     ]
@@ -107,6 +107,16 @@
     "text": "13.7 What are parallel spatial variograms, one per time lag?\nYou are doing the following:\nFix a time lag (e.g., 1 week, 2 weeks, 4 weeks)\nFor that fixed time lag, compute a spatial variogram\nvariability vs spatial distance only\nRepeat this for multiple time lags\nPlot all these spatial variograms on the same axes\nSo each curve represents:\n“How spatial dependence behaves when observations are separated by a specific amount of time.”\nIf the spatial variograms are roughly parallel\nThis tells you:\nThe spatial dependence structure is stable across time lags.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Spatio-temporal Forecasting</span>"
+    ]
+  },
+  {
+    "objectID": "14-chap14.html",
+    "href": "14-chap14.html",
+    "title": "14  Meta-learning and Time Series Clustering",
+    "section": "",
+    "text": "Feature-based time series forecasting\nFeature calculation using Python\nTime Series Clustering\nPeriodogram - Using R\nPeriodogram - Using Python\nSpatial Interpolation with Python\nVariogram calculationn - Excel\nSpatial Visualisation with Python\nSpatial Visualisation with Plotnine",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Meta-learning and Time Series Clustering</span>"
     ]
   }
 ]

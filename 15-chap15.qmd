@@ -1,0 +1,156 @@
+
+# meuse (cont)
+
+
+
+1. “There is clear evidence of anisotropy in the variograms”
+
+What this means
+
+Directional variograms (e.g. 0°, 45°, 90°, 135°) are not the same
+
+The rate at which semivariance increases depends on direction
+
+👉 Therefore, spatial dependence is direction-dependent, not isotropic.
+
+2. “The highest level of spatial correlation is shown in the 45° variogram”
+
+Key idea
+
+Highest spatial correlation ⇔ lowest semivariance for a given distance
+
+Or equivalently: largest range
+
+So this tells us:
+
+Along 45°, observations remain similar over longer distances
+
+This is the major axis of anisotropy
+
+Plain-language interpretation
+
+The process varies most smoothly along the 45° direction.
+
+This often aligns with a physical or structural direction (wind, river, slope, coastline, etc.).
+
+3. “When the sill appears to be different in different directions, this suggests a trend in the data”
+
+⚠️ This is a very important point.
+
+Reminder: what the sill represents
+
+The sill ≈ total variance of a stationary process
+
+Under second-order stationarity:
+
+The sill should be the same in all directions
+
+So if sills differ by direction…
+
+It usually means:
+
+The assumption of stationarity is violated
+
+There is a large-scale trend (drift) in the data.
+
+Intuition
+
+A trend inflates semivariance more in some directions than others
+
+This can look like anisotropy, but it’s actually non-stationarity
+
+Not all apparent anisotropy is “true” anisotropy — some of it is trend.
+
+4. Why this is a problem
+
+Geostatistical models assume:
+
+Constant mean (or trend removed)
+
+Direction-invariant variance
+
+If you ignore the trend:
+
+The variogram tries to explain large-scale structure
+
+You get direction-dependent sills, which are hard to model properly.
+
+5. Ways to deal with this situation
+
+Now the three solutions make sense.
+
+(1) Fit a nested semivariogram with an infinite range in one direction
+
+What this means
+
+Add a component that never reaches a sill in one direction
+
+Infinite range ≈ captures a trend-like structure
+
+Interpretation
+
+Small-scale variation → finite-range variogram
+
+Large-scale trend → infinite-range component.
+
+When used
+
+When trend is directional and you don’t want to model it explicitly
+
+Common in classical geostatistics
+
+(2) Fit a semivariogram along one direction with no trend
+
+What this means
+
+Choose the direction where the data appear most stationary
+
+Often the direction perpendicular to the trend
+
+Interpretation
+
+“If I analyze only this direction, the trend effect is minimal.”
+
+Limitations
+
+You lose information from other directions
+
+Mainly a diagnostic or pragmatic solution
+
+(3) Fit a trend to the data, then fit a semivariogram to the residuals ✅ (most principled)
+
+What this means
+
+Model the mean structure:
+
+Linear trend
+
+Polynomial surface
+
+Covariates (elevation, latitude, etc.)
+
+Compute residuals
+
+Fit a variogram to the residuals
+
+Why this works
+
+Residuals are closer to stationary
+
+Directional sills should now be similar
+
+Remaining anisotropy reflects true spatial dependence
+
+This is often the preferred modern approach.
+
+## Key takeaway
+
+Directional variograms indicate clear anisotropy, with the strongest spatial correlation occurring along the 45° direction. However, the presence of direction-dependent sills suggests non-stationarity due to an underlying trend in the data. To address this, the trend may be explicitly modeled and removed prior to variogram estimation, or alternatively, a nested semivariogram with an infinite-range component may be employed to capture large-scale variation. Variogram modeling of the residuals then allows valid inference under stationarity assumptions.
+
+Different ranges → anisotropy
+
+Different sills → likely trend
+
+Always ask:
+
+“Is this true anisotropy, or trend masquerading as anisotropy?”

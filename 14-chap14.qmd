@@ -1,0 +1,19 @@
+## Meta-learning and Time Series Clustering
+
+[Feature-based time series forecasting](https://robjhyndman.com/papers/fforms.pdf)
+
+[Feature calculation using Python](https://github.com/thiyangt/helloPython/blob/master/Time%20Series%20Features.ipynb)
+
+[Time Series Clustering](https://thiyanga-spatiotemporal.netlify.app/posts/time_series/week8b.html#/title-slide)
+
+[Periodogram - Using R](https://thiyangt.github.io/spatio-temporal/Week9/)
+
+[Periodogram - Using Python](https://thiyangt.github.io/spatio-temporal/Week10/)
+
+[Spatial Interpolation with Python](https://scikit-gstat.readthedocs.io/en/latest/userguide/kriging.html)
+
+[Variogram calculationn - Excel](https://github.com/GeostatsGuy/GeoDataSets/blob/master/1D_Porosity.xlsx)
+
+[Spatial Visualisation with Python](https://thiyangt.github.io/spatio-temporal/Week4p2/)
+
+[Spatial Visualisation with Plotnine](https://thiyangt.github.io/spatio-temporal/Week5/)
